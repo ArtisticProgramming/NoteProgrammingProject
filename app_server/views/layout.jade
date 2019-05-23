@@ -1,0 +1,106 @@
+doctype html
+html(ng-app='loc8rApp')
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    link(rel='stylesheet', href='/bootstrap/css/amelia.bootstrap.css')
+    link(rel='stylesheet', href='/CodeMirror/codemirror.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/3024-day.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/3024-night.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/abcdef.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/ambiance.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/base16-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/bespin.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/base16-light.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/blackboard.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/cobalt.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/colorforth.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/dracula.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/duotone-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/duotone-light.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/eclipse.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/elegant.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/erlang-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/gruvbox-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/hopscotch.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/icecoder.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/isotope.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/lesser-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/liquibyte.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/lucario.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/material.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/mbo.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/mdn-like.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/midnight.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/monokai.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/neat.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/neo.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/night.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/nord.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/oceanic-next.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/panda-syntax.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/paraiso-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/paraiso-light.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/pastel-on-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/railscasts.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/rubyblue.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/seti.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/shadowfox.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/solarized.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/the-matrix.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/tomorrow-night-bright.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/tomorrow-night-eighties.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/ttcn.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/twilight.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/vibrant-ink.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/xq-dark.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/xq-light.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/yeti.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/idea.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/darcula.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/yonce.css')
+    link(rel='stylesheet', href='/CodeMirror/Theme/zenburn.css')
+    link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2.min.css')
+    link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2-bootstrap.min.css')
+  body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href='/') Loc8r
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-main')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        #navbar-main.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/about/') About
+            li
+              a(href='/test/') Test
+            li
+              a(href='/AddNote/') AddNote
+
+    .container
+      block content
+
+      footer
+        .row
+          .col-xs-12
+            small &copy; Simon Holmes 2014
+
+    script(src='/angular/angular.min.js')
+    script(src='/angular/loc8rApp.js')
+    script(src='/javascripts/jquery-3.4.1.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='/javascripts/validation.js')
+    script(src='/CodeMirror/codemirror.js')
+    script(src='/CodeMirror/xml.js')
+    script(src='/CodeMirror/javascript.js')
+    script(src='/CodeMirror/css.js')
+    script(src='/CodeMirror/htmlmixed.js')
+    script(src='/CodeMirror/matchbrackets.js')
+
+    script(src='/ThirdParty/select2-4.0.7/dist/js/select2.full.min.js')
+    script(src='/javascripts/test.js')
+
