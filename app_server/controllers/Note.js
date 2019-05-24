@@ -28,3 +28,10 @@ module.exports.PostAddNote = function (req, res) {
 
     res.render("AddNote",{title:"Add Note"});
 };
+// -----------------------------------------------------------------------------
+module.exports.Notes = function (req, res) {
+
+    res.render("Notes",{title:"Notes"});
+};
+
+

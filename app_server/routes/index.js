@@ -18,5 +18,6 @@ router.post('/test', ctrlOthers.doTest);
 //Note Pages
 router.get('/AddNote',ctrlNote.AddNote);
 router.post('/PostAddNote',ctrlNote.PostAddNote);
+router.get('/Notes',ctrlNote.Notes);
 
 module.exports = router;

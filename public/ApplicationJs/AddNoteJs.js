@@ -1,5 +1,7 @@
 $(document).ready(function(){
     $(document).ready(function () {
+        // $('.moreContent').moreContent();
+
     var preload_data = [
         { id: 'user0', text: 'Disabled User', locked: true}
         , { id: 'user1', text: 'Jane Doe'}
@@ -20,7 +22,7 @@ $(document).ready(function(){
     var editArr=[];
     for( i=0; i < document.getElementsByClassName("code").length; i++){
         var editor = CodeMirror.fromTextArea(document.getElementsByClassName("code")[i], {
-            lineNumbers: true,
+            // lineNumbers: true,
             styleActiveLine: true,
             matchBrackets: true,
             // mode: "htmlmixed"
