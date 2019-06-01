@@ -1,6 +1,6 @@
-import { google } from "../Uitlity/Keyes";
-import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
-export default (passport) => {
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+module.exports = (passport) => {
     passport.serializeUser((user, done) => {
         done(null, user);
     });
@@ -8,9 +8,9 @@ export default (passport) => {
         done(null, user);
     });
     passport.use(new GoogleStrategy({
-            clientID: google.ClientID,
-            clientSecret: google.Clientsecret,
-            callbackURL: google.CallBackURL
+            clientID: "587167700911-t4216j1jmp96smjejjj6mdo09seubv30.apps.googleusercontent.com",
+            clientSecret: "YiOwqXAHuR0NIeay_nkCTpNS",
+            callbackURL: "/auth/google/redirect"
         },
         (token, refreshToken, profile, done) => {
             return done(null, {
