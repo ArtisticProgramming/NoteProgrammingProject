@@ -55,11 +55,11 @@ process.on('SIGINT', function() {
     });
 });
 // For Heroku app termination
-process.on('SIGTERM', function() {
-    gracefulShutdown('Heroku app termination', function() {
-        process.exit(0);
-    });
-});
+// process.on('SIGTERM', function() {
+//     gracefulShutdown('Heroku app termination', function() {
+//         process.exit(0);
+//     });
+// });
 
 // BRING IN YOUR SCHEMAS & MODELS
 require('./locations');
