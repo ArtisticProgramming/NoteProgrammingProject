@@ -1,6 +1,6 @@
-var keyes = require("../Uitlity/Keyes")
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-module.exports = (passport) => {
+import { google } from "../Uitlity/Keyes";
+import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
+export default (passport) => {
     passport.serializeUser((user, done) => {
         done(null, user);
     });
@@ -8,9 +8,9 @@ module.exports = (passport) => {
         done(null, user);
     });
     passport.use(new GoogleStrategy({
-            clientID: keyes.google.ClientID,
-            clientSecret: keyes.google.Clientsecret,
-            callbackURL: keyes.google.CallBackURL
+            clientID: google.ClientID,
+            clientSecret: google.Clientsecret,
+            callbackURL: google.CallBackURL
         },
         (token, refreshToken, profile, done) => {
             return done(null, {
