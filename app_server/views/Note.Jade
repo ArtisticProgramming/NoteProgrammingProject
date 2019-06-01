@@ -24,7 +24,8 @@ block content
                   if bodyVal
                     textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
                     br
-              each tagVal in model.tags
+          .card-footer.text-muted
+            each tagVal in model.tags 
                       span.tag=  tagVal
     //- .row  
     //-   .col-lg-12

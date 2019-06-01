@@ -60,8 +60,9 @@ block content
                     if bodyVal
                       textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
                       br
-                each tagVal in val.tags
-                        span.tag=  tagVal
+            .card-footer.text-muted
+               each tagVal in val.tags 
+                      span.tag=  tagVal
       
         //- .col-md-12
         //-       .mc-wrapper(id= val.id, style="")
