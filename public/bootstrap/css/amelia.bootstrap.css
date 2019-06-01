@@ -302,6 +302,7 @@ html {
 }
 
 body {
+  margin-top: 50px;
   font-family: "Cabin", Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
@@ -549,7 +550,7 @@ h4 small,
 
 .page-header {
   padding-bottom: 9px;
-  margin: 40px 0 20px;
+  /* margin: 40px 0 20px; */
   border-bottom: 1px solid #0d747c;
 }
 
@@ -4699,8 +4700,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-default {
-  background-color: #ad1d28;
-  border-color: #911821;
+  background-color: #1a2a55;
+  border-color: #090834;
 }
 
 .navbar-default .navbar-brand {

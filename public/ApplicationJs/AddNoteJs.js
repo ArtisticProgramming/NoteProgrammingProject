@@ -22,10 +22,11 @@ $(document).ready(function(){
     var editArr=[];
     for( i=0; i < document.getElementsByClassName("code").length; i++){
         var editor = CodeMirror.fromTextArea(document.getElementsByClassName("code")[i], {
-            // lineNumbers: true,
+            lineNumbers: true,
             styleActiveLine: true,
             matchBrackets: true,
-            // mode: "htmlmixed"
+            viewportMargin: Infinity,
+            mode: "htmlmixed"
             });
 
             editArr.push(editor)

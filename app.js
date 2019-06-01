@@ -4,6 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var auth = require('./Config/auth');
+cookieParser = require('cookie-parser'),
+cookieSession = require('cookie-session');
+//---------Passport--------------
+
+
 require('./app_api/models/db');
 
 var routes = require('./app_server/routes/index');
@@ -11,6 +18,14 @@ var routesApi = require('./app_api/routes/index');
 // var users = require('./app_server/routes/users');
 
 var app = express();
+
+auth(passport);
+app.use(passport.initialize());
+app.use(cookieSession({
+    name: 'session',
+    keys: ['123']
+}));
+app.use(cookieParser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
@@ -59,5 +74,14 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// app.all('*',function(req,res,next){
+//     if(req.isAuthenticated()){
+//         console.log("-----------------------req.isAuthenticated() = "+ req.isAuthenticated())
+//         next();
+//     }else{
+//         console.log("----------------------req.isAuthenticated() = "+ req.isAuthenticated())
+//         next(new Error(401)); // 401 Not Authorized
+//     }
+// });
 
 module.exports = app;

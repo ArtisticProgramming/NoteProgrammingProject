@@ -63,6 +63,8 @@ html(ng-app='loc8rApp')
     link(rel='stylesheet', href='/CodeMirror/Theme/zenburn.css')
     link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2.min.css')
     link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2-bootstrap.min.css')
+    link(rel='stylesheet', href='/ThirdParty/simplePagination.js-master/simplePagination.css')
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   body
     .navbar.navbar-default.navbar-fixed-top
       .container
@@ -95,6 +97,7 @@ html(ng-app='loc8rApp')
     script(src='/angular/loc8rApp.js')
     script(src='/javascripts/jquery-3.4.1.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
+
     script(src='/javascripts/validation.js')
     script(src='/CodeMirror/codemirror.js')
     script(src='/CodeMirror/xml.js')
@@ -105,7 +108,9 @@ html(ng-app='loc8rApp')
     script(src='/ThirdParty/select2-4.0.7/dist/js/select2.full.min.js')
     script(src='/ApplicationJs/AddNoteJs.js')
     script(src='/ApplicationJs/NotesJs.js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.min.js"></script>
+    script(src='/ApplicationJs/NoteUtilityJs.js')
+    
     script(src='/ThirdParty/jQuery-Plugin-For-SEO-Friendly-Hiding-of-Long-Text-moreContent-js/jquery.morecontent.min.js')
+    script(src='/ThirdParty/simplePagination.js-master/jquery.simplePagination.js')
 
 

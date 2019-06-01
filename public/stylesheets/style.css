@@ -1,4 +1,4 @@
-.review {padding-bottom: 5px;}
+/* .review {padding-bottom: 5px;}
 .panel-body.review-container {padding-top: 0;}
 .review-header {margin-bottom: 10px;}
 .reviewAuthor {margin: 0 5px;}
@@ -6,4 +6,49 @@
 
 .label-facility {margin-right: 2px}
 .rating-stars {margin-left: 3px;}
-#filter {margin-left: 4px;}
+#filter {margin-left: 4px;} */
+
+.CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+  
+
+  /* ---------------------------------------------------------
+   */
+.mc-wrapper {
+    background: white;
+    box-shadow: 0 2px 2px 1px rgba(92, 81, 81, 0.38);
+    margin-bottom: 15px;
+}
+.note-title{
+      padding: 4px 10px;
+      color: white;
+       background-color: #251486;
+}
+.moreContent {
+        padding: 10px;
+        position: relative;
+        overflow-y: scroll;
+        height: 100px;
+    }
+.moreContentFull {
+      padding: 10px;
+      position: relative;
+      height: auto;
+
+}
+.tag {
+      padding: 0px 5px;
+      background-color: #1d35ad;
+      margin: 2px;
+      color: white;
+      border-radius: 4px;
+      font-size: smaller;
+}
+.toolbar{
+  float:right;
+  color: #e5e5e5;
+  margin: 0px 5px;
+}
+/* -----------------    */

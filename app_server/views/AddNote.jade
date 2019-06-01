@@ -1,111 +1,97 @@
-extends layout
+extends layoutAdmin
 
 block content
-  #banner.page-header
     .row
-      .col-md-6.col-sm-12
-        h1= title
-  .container(style='margin-top:150px;')
-    .moreContent(data-height='243')
-      h1 moreContent.js
-      p
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam molestie justo non nisi elementum, sit amet mollis magna rutrum. Aliquam porttitor ipsum vel lacus lacinia pellentesque. Donec aliquam cursus elementum. Integer vel sollicitudin est. Mauris commodo lacus non eros iaculis, et lobortis odio hendrerit. Phasellus pellentesque commodo maximus. Donec bibendum magna neque, id fermentum nunc tempor nec. Nulla pellentesque purus et felis egestas euismod. Ut vestibulum vulputate augue at luctus. Morbi eu eros urna. Fusce dapibus faucibus posuere. Sed sed enim nulla. Etiam eu felis nec sapien convallis suscipit non ac est. Curabitur sed felis eu leo fermentum tristique. Vestibulum imperdiet hendrerit libero a sodales. Sed fringilla eget magna eget feugiat.
-      p
-        | Quisque cursus venenatis vestibulum. Phasellus volutpat libero eu odio tristique, non auctor libero condimentum. Sed a tempus lorem. Integer elementum pulvinar congue. Phasellus ac porttitor arcu. Nulla eget finibus turpis, et eleifend mi. Nunc euismod rhoncus consectetur. Proin consequat risus libero, ut condimentum nunc lobortis mollis. Pellentesque volutpat felis quam, ut aliquam massa ultrices at. Suspendisse consectetur vulputate interdum. Proin efficitur ullamcorper massa non rhoncus. Aliquam mollis, eros nec facilisis bibendum, augue nunc sodales ex, in efficitur turpis leo ac massa. Nullam at ex felis. Sed sem diam, pellentesque et sapien in, accumsan pulvinar purus. Curabitur id sapien lectus.
-      p
-        | Sed lobortis sollicitudin turpis in vulputate. Sed lobortis condimentum risus nec pharetra. Maecenas non velit eu est mattis porttitor sit amet rutrum nisl. Vivamus vestibulum, lacus in imperdiet condimentum, tortor massa tempor est, ac congue ante metus a magna. Sed pharetra magna arcu, eu pulvinar turpis iaculis ac. Vivamus mattis, sem non mollis iaculis, nunc ligula lacinia dui, in egestas est nisl a turpis. Sed tempus enim vel nibh pretium, nec euismod nulla luctus. Curabitur semper accumsan nisi, eu eleifend felis placerat nec. Sed consectetur quis nibh ac sagittis. In mattis ac est sit amet euismod. Integer auctor scelerisque gravida. Donec fringilla dapibus lectus, mattis consectetur tellus luctus eget. Etiam sem eros, bibendum vitae dictum eget, maximus maximus velit. Praesent tempus dignissim nibh, sed egestas diam suscipit malesuada.
-      p
-        | Nam laoreet gravida velit. Aliquam erat volutpat. Mauris pharetra ante sit amet pharetra pretium. Sed porttitor venenatis nibh non consectetur. Nullam volutpat massa sit amet tempor tincidunt. Ut ac viverra neque. Sed eleifend lobortis rutrum. Vivamus elementum, nibh sed sagittis dignissim, tellus urna molestie neque, a pretium dolor mi eget dui. Maecenas viverra ante at fringilla lobortis. Suspendisse gravida, arcu sit amet congue semper, purus orci pulvinar felis, id vulputate nibh lectus ac mauris. Morbi et pulvinar ante, in lobortis justo. Suspendisse potenti.
-      p
-        | In et nunc vel nunc eleifend tempor. Nam sit amet iaculis metus, a tempor ipsum. Nam nec tellus sit amet justo consequat pharetra vitae at risus. Etiam pellentesque eleifend malesuada. Fusce eget ante id tortor iaculis finibus. Maecenas volutpat arcu luctus lacus pellentesque, a malesuada quam sollicitudin. Proin vulputate rutrum urna, nec faucibus neque elementum in. Nulla neque nunc, tincidunt in hendrerit nec, rutrum ac justo. Nunc sodales nunc eget dolor porttitor, non lacinia ipsum aliquam. Ut vel sodales quam. In hac habitasse platea dictumst. Fusce tincidunt est et libero pulvinar, ut tincidunt odio finibus. Nullam pulvinar, tortor eget finibus tempus, purus augue euismod odio, vitae semper diam sapien at ante. Donec mi leo, facilisis a arcu a, maximus ullamcorper lectus. Nullam cursus libero dolor, ac finibus urna pharetra sed.
-        
-  form(role="form", action="/PostAddNote", method="post")
+      .col-md-12.col-sm-12
+        .card.mb-4
+          .card-header
+            | Add Note
+          .card-body
+             form(role="form", action="/PostAddNote", method="post")
+                .form-group
+                  label(for='exampleInputEmail1' ) Title
+                  input#exampleInputEmail1.form-control(type='text', aria-describedby='emailHelp', placeholder='Title', name='title')
+                  //-  small#emailHelp.form-text.text-muted Desc
+                //- .form-group.col-md-2
+                //-   label(for='') Select theme
+                //-   select#themeSelect.form-control
+                //-     option(selected='') default
+                //-     option 3024-day
+                //-     option 3024-night
+                //-     option abcdef
+                //-     option ambiance
+                //-     option base16-dark
+                //-     option base16-light
+                //-     option bespin
+                //-     option blackboard
+                //-     option cobalt
+                //-     option colorforth
+                //-     option darcula
+                //-     option dracula
+                //-     option duotone-dark
+                //-     option duotone-light
+                //-     option eclipse
+                //-     option elegant
+                //-     option erlang-dark
+                //-     option gruvbox-dark
+                //-     option hopscotch
+                //-     option icecoder
+                //-     option idea
+                //-     option isotope
+                //-     option lesser-dark
+                //-     option liquibyte
+                //-     option lucario
+                //-     option material
+                //-     option mbo
+                //-     option mdn-like
+                //-     option midnight
+                //-     option monokai
+                //-     option neat
+                //-     option neo
+                //-     option night
+                //-     option nord
+                //-     option oceanic-next
+                //-     option panda-syntax
+                //-     option paraiso-dark
+                //-     option paraiso-light
+                //-     option pastel-on-dark
+                //-     option railscasts
+                //-     option rubyblue
+                //-     option seti
+                //-     option shadowfox
+                //-     option solarized dark
+                //-     option solarized light
+                //-     option the-matrix
+                //-     option tomorrow-night-bright
+                //-     option tomorrow-night-eighties
+                //-     option ttcn
+                //-     option twilight
+                //-     option vibrant-ink
+                //-     option xq-dark
+                //-     option xq-light
+                //-     option yeti
+                //-     option yonce
+                //-     option zenburn
+                .form-group
+                  label(for='') Select 
+                  select#w.form-control.select2-multiple(name="tags" multiple="multiple")
+                    option(value='Sql') Sql
+                    option(value=' C#') C#         
+                    option(value='Java') Java
+                    option(value='Node Js') Node Js         
+                    option(value='Java Script') Java Script
+                    option(value='Python') Python
 
-    div.row
-      .form-group.col-md-10
-       label(for='exampleInputEmail1' ) Title
-       input#exampleInputEmail1.form-control(type='text', aria-describedby='emailHelp', placeholder='Title', name='title')
-      //-  small#emailHelp.form-text.text-muted Desc
+                .form-group.note-body
+                  <label for="exampleFormControlTextarea1">Body</label>
+                  textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")
+                  
 
-      
-      .form-group.col-md-2
-        label(for='') Select theme
-        select#themeSelect.form-control
-          option(selected='') default
-          option 3024-day
-          option 3024-night
-          option abcdef
-          option ambiance
-          option base16-dark
-          option base16-light
-          option bespin
-          option blackboard
-          option cobalt
-          option colorforth
-          option darcula
-          option dracula
-          option duotone-dark
-          option duotone-light
-          option eclipse
-          option elegant
-          option erlang-dark
-          option gruvbox-dark
-          option hopscotch
-          option icecoder
-          option idea
-          option isotope
-          option lesser-dark
-          option liquibyte
-          option lucario
-          option material
-          option mbo
-          option mdn-like
-          option midnight
-          option monokai
-          option neat
-          option neo
-          option night
-          option nord
-          option oceanic-next
-          option panda-syntax
-          option paraiso-dark
-          option paraiso-light
-          option pastel-on-dark
-          option railscasts
-          option rubyblue
-          option seti
-          option shadowfox
-          option solarized dark
-          option solarized light
-          option the-matrix
-          option tomorrow-night-bright
-          option tomorrow-night-eighties
-          option ttcn
-          option twilight
-          option vibrant-ink
-          option xq-dark
-          option xq-light
-          option yeti
-          option yonce
-          option zenburn
-    div.row     
-      .form-group.col-md-12
-        label(for='') Select 
-        select#w.form-control.select2-multiple(name="states[]" multiple="multiple")
-          option(value='AL') Alabama
-          option(value='WY99') Wyoming         
-          option(value='AL656') Alabama
-          option(value='WY2234') Wyoming         
-          option(value='AL0000') Alabama
-          option(value='WY9999') Wyoming
+                a.d-none.d-sm-inline-block.btn.btn-sm.btn-success.shadow-sm(id='addprogrammingnotebody')
+                  i.fas.fa-plus.fa-sm.text-white-50
+                  |  Add
 
-    
-    .form-group
-      <label for="exampleFormControlTextarea1"  >Body</label>
-      textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")
-      br
-      textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;")
-    
-    button.btn.btn-primary(type='submit') Submit
+
+                button.btn.btn-primary.btn-user.btn-block(type='submit') Submit
 
 
