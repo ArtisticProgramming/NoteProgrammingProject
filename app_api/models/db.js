@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 // var dbURI = 'mongodb://localhost/Loc8r';
-var dbURI = 'mongodb+srv://poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';
+var dbURI = 'mongodb//poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';
 //console("process.env.NODE_ENV="+ process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
-    dbURI = 'mongodb+srv://poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';//process.env.MONGOLAB_URI;
+    dbURI = process.env.MONGOLAB_URI//'mongodb+srv://poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';//process.env.MONGOLAB_URI;
 }
 mongoose.set('useCreateIndex', true)
 mongoose.connect(dbURI,{ useNewUrlParser: true });
