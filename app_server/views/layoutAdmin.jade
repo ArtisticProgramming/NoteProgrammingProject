@@ -10,7 +10,8 @@ html(lang='en')
     // Custom fonts for this template
     link(href='/vendor/fontawesome-free/css/all.min.css', rel='stylesheet', type='text/css')
     link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i', rel='stylesheet')
-    link(rel='stylesheet', href='/CodeMirror/codemirror.css')
+    link(rel='stylesheet', href='/vendor/codemirror/lib/codemirror.css')
+    link(rel='stylesheet', href='/vendor/codemirror/addon/fold/foldgutter.css')
     link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2.min.css')
     link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2-bootstrap.min.css')
     link(rel='stylesheet', href='/ThirdParty/simplePagination.js-master/simplePagination.css')
@@ -266,17 +267,31 @@ html(lang='en')
             // Custom scripts for all pages
             script(src='/js/sb-admin-2.js')
                 script(src='/javascripts/validation.js')
-            script(src='/CodeMirror/codemirror.js')
-            script(src='/CodeMirror/xml.js')
-            script(src='/CodeMirror/javascript.js')
-            script(src='/CodeMirror/css.js')
-            script(src='/CodeMirror/htmlmixed.js')
-            script(src='/CodeMirror/matchbrackets.js')
+            script(src='/vendor/codemirror/lib/codemirror.js')
+            //- script(src='/vendor/codemirror/mode/xml/xml.js')
+            script(src='/vendor/codemirror/addon/selection/active-line.js')
+
+            script(src='/vendor/codemirror/addon/fold/foldcode.js')
+            script(src='/vendor/codemirror/addon/fold/foldgutter.js')
+            script(src='/vendor/codemirror/addon/fold/brace-fold.js')
+            script(src='/vendor/codemirror/addon/fold/xml-fold.js')
+            script(src='/vendor/codemirror/addon/fold/indent-fold.js')
+            script(src='/vendor/codemirror/addon/fold/markdown-fold.js')
+            script(src='/vendor/codemirror/addon/fold/comment-fold.js')
+            script(src='/vendor/codemirror/mode/javascript/javascript.js')
+            script(src='/vendor/codemirror/mode/css/css.js')
+            script(src='/vendor/codemirror/mode/htmlmixed/htmlmixed.js')
+            script(src='/vendor/codemirror/mode/htmlmixed/htmlmixed.js')
+            script(src='/vendor/codemirror/mode/python/python.js')
+            script(src='/vendor/codemirror/mode/sql/sql.js')
+
+
+
             script(src='/ThirdParty/select2-4.0.7/dist/js/select2.full.min.js')
             script(src='/ApplicationJs/AddNoteJs.js')
             script(src='/ApplicationJs/NotesJs.js')
             script(src='/ApplicationJs/NoteUtilityJs.js')
-            
+
             script(src='/ThirdParty/jQuery-Plugin-For-SEO-Friendly-Hiding-of-Long-Text-moreContent-js/jquery.morecontent.min.js')
             script(src='/ThirdParty/simplePagination.js-master/jquery.simplePagination.js')
             // Page level plugins
