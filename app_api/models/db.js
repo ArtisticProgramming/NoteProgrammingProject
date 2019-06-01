@@ -8,7 +8,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 mongoose.set('useCreateIndex', true);
 
-mongoose.connect(dbURI,    {useNewUrlParser: true});
+mongoose.connect(dbURI,{useNewUrlParser: true,  ssl: true,
+    authSource: "admin",
+    replicaSet: "TestCluster0-shard-0"});
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
