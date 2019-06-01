@@ -1,13 +1,27 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 // var dbURI = 'mongodb://localhost/Loc8r';
-var dbURI = 'mongodb//poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';
+var dbURI = 'mongodb+srv://poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';
 //console("process.env.NODE_ENV="+ process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI//'mongodb+srv://poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';//process.env.MONGOLAB_URI;
 }
-mongoose.set('useCreateIndex', true)
-mongoose.connect(dbURI,{ useNewUrlParser: true });
+mongoose.set('useCreateIndex', true);
+var options = { 
+    useNewUrlParser: true ,
+    server: { 
+      socketOptions: { 
+        keepAlive: 300000, connectTimeoutMS: 30000 
+      } 
+    }, 
+    replset: { 
+      socketOptions: { 
+        keepAlive: 300000, 
+        connectTimeoutMS : 30000 
+      } 
+    } 
+  };
+mongoose.connect(dbURI,options);
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
