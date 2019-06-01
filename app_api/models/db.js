@@ -7,21 +7,8 @@ if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI//'mongodb+srv://poland2019:warsaw2019@cluster0-jgl44.mongodb.net/test?retryWrites=true&w=majority';//process.env.MONGOLAB_URI;
 }
 mongoose.set('useCreateIndex', true);
-var options = { 
-    useNewUrlParser: true ,
-    server: { 
-      socketOptions: { 
-        keepAlive: 300000, connectTimeoutMS: 30000 
-      } 
-    }, 
-    replset: { 
-      socketOptions: { 
-        keepAlive: 300000, 
-        connectTimeoutMS : 30000 
-      } 
-    } 
-  };
-mongoose.connect(dbURI,options);
+
+mongoose.connect(dbURI,    {useNewUrlParser: true});
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
