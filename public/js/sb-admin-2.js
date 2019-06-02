@@ -1,25 +1,64 @@
 (function ($) {
   "use strict"; // Start of use strict
-   var idc=1;
+  var idc = 1;
   $('body').on('click', '#addprogrammingnotebody', function () {
     // alert("s")
     debugger;
-    let id="code"+idc
-    var  formsecS=`<div class="form-group note-body"><label for="exampleFormControlTextarea1">Body</label>`;
-    var  formsecE=`</div>`;
-    var textAreaBody= `<textarea id="`+id+`" rows="8" name="body" style="margin: 10px; " value="" class="code form-control"></textarea>`
-    $(".note-body").last().after(formsecS+textAreaBody+formsecE); 
-    
+    let id = "code" + idc
+    let idSelect = "code" + idc
+
+    var textAreaBody = `<div class="form-group note-body">
+                          <textarea id="`+ id + `" rows="8" name='code[` + idc + `][body]' style="margin: 10px; "
+                          value="" class="code form-control"></textarea>
+                      </div`
+
+    var row = `<div class="row">
+            <div class="form-group col-md-9"><input id="exampleInputEmail1" 
+                type="text" aria-describedby="emailHelp"
+                    placeholder="Title" name="code[`+ idc + `][desc]" class="form-control"></div>
+            <div box-id="`+ id + `"  class="form-group col-md-3 selectlang">
+            <select class="form-control form-control" name="code[`+ idc + `][codelang]">
+                    <option value="htmlmixed">Html</option>
+                    <option value="text/css"> CSS</option>
+                    <option value="text/javascript"> JavaScript</option>
+                    <option value="text/x-sql"> SQl</option>
+                    <option value="text/x-csharp"> C#</option>
+                    <option value="text/x-python"> Python</option>
+                    <option value="text/x-java"> Java</option>
+                    <option value="text/x-php"> PHP</option>
+                    <option value="text/x-c++src"> C++</option>
+                    <option value="text/x-csrc"> C</option>
+                    <option value="text/x-go"> Go</option>
+                    <option value="text/x-rsrc"> R</option>
+                    <option value="application/x-powershell"> PowerShell</option>
+                </select></div>
+            </div>`
+
+    $(".note-body").last().after(row + textAreaBody);
+
     var editor = CodeMirror.fromTextArea(document.getElementById(id), {
       lineNumbers: true,
       styleActiveLine: true,
       matchBrackets: true,
       viewportMargin: Infinity,
-      mode: "htmlmixed"
-      });
+      // mode: "htmlmixed"
+    });
     // editArr.push(editor)
-    idc=idc+1; 
+    idc = idc + 1;
   });
+
+  $('body').on('change', '.selectlang', function () {
+    var s = $(this).attr("box-id")
+    var v = $(this).val()
+    // alert(s+v);
+  });
+
+  $("#searchBoxBtn").click(function () {
+    var result = $("#searchBox").val();
+    location.href = "/Notes?title="+result;
+  });
+
+
 
   function toggleSidebar() {
     $("body").toggleClass("sidebar-toggled");
@@ -28,7 +67,7 @@
       $('.sidebar .collapse').collapse('hide');
     };
   }
-  toggleSidebar();
+  //toggleSidebar();
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
     toggleSidebar();

@@ -19,27 +19,22 @@ block content
                 .dropdown-divider
                 a.dropdown-item(href='#') Something else here
           // Card Body
-          .card-body(model= model.id, style="")
-            each bodyVal in model.body
-                  if bodyVal
-                    textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
-                    br
+          //- .card-body(model= model.id, style="")
+          //-   each bodyVal in model.body
+          //-         if bodyVal
+          //-           textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
+          //-           br
+          //- .card-footer.text-muted
+          //-   each tagVal in model.tags 
+          //-             span.tag=  tagVal
+          .card-body.cardHeigth(model= model.id, style="")
+              each code in model.code
+                    if code.description
+                      h6= code.description
+                    if code.mainbody
+                      textarea#code.code.form-control(rows='8',lang=code.porgrammingStylelanguge ,name='body',style="margin: 10px;",value="")= code.mainbody
+                      br
           .card-footer.text-muted
-            each tagVal in model.tags 
+               each tagVal in model.tags 
                       span.tag=  tagVal
-    //- .row  
-    //-   .col-lg-12
-    //-         .mc-wrapper(model= model.id, style="")
-    //-           h3.note-title= model.title
-    //-             //- a.toolbar.OpenCloseNote(href="#")
-    //-             //-  <i class="fas fa-arrows-alt"></i>
-    //-             //- a.toolbar(href="/Note?id=" + model.id)
-    //-             //-  <i class="fas fa-external-link-square-alt"></i>
-    //-           .moreContentFull
-    //-             each bodyVal in model.body
-    //-               if bodyVal
-    //-                 textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
-    //-                 br
-    //-           each tagVal in model.tags
-    //-                   span.tag=  tagVal
 

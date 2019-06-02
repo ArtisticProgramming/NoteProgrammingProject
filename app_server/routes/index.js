@@ -14,11 +14,6 @@ function IsAuthenticated(req,res,next){
         res.cookie('token', '')
         next(res.redirect('/'))
     }
-    // if(req.isAuthenticated()){
-    //     next();
-    // }else{
-    //     next(res.redirect('/auth/google'))
-    // }
 }
 /* Locations pages */
 // router.get('/', ctrlLocations.homelist);
@@ -50,6 +45,8 @@ router.get('/AddNote',IsAuthenticated,ctrlNote.AddNote);
 router.post('/PostAddNote',IsAuthenticated,ctrlNote.PostAddNote);
 router.get('/Notes',IsAuthenticated,ctrlNote.Notes);
 router.get('/Note',IsAuthenticated, ctrlNote.Note);
+router.get('/GetNotes',IsAuthenticated, ctrlNote.GetNotes);
+
 router.get('/LoadMore', ctrlNote.LoadMore);
 
 router.get('/', (req, res) => {

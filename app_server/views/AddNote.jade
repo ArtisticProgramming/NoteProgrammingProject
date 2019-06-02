@@ -11,67 +11,7 @@ block content
                 .form-group
                   label(for='exampleInputEmail1' ) Title
                   input#exampleInputEmail1.form-control(type='text', aria-describedby='emailHelp', placeholder='Title', name='title')
-                  //-  small#emailHelp.form-text.text-muted Desc
-                //- .form-group.col-md-2
-                //-   label(for='') Select theme
-                //-   select#themeSelect.form-control
-                //-     option(selected='') default
-                //-     option 3024-day
-                //-     option 3024-night
-                //-     option abcdef
-                //-     option ambiance
-                //-     option base16-dark
-                //-     option base16-light
-                //-     option bespin
-                //-     option blackboard
-                //-     option cobalt
-                //-     option colorforth
-                //-     option darcula
-                //-     option dracula
-                //-     option duotone-dark
-                //-     option duotone-light
-                //-     option eclipse
-                //-     option elegant
-                //-     option erlang-dark
-                //-     option gruvbox-dark
-                //-     option hopscotch
-                //-     option icecoder
-                //-     option idea
-                //-     option isotope
-                //-     option lesser-dark
-                //-     option liquibyte
-                //-     option lucario
-                //-     option material
-                //-     option mbo
-                //-     option mdn-like
-                //-     option midnight
-                //-     option monokai
-                //-     option neat
-                //-     option neo
-                //-     option night
-                //-     option nord
-                //-     option oceanic-next
-                //-     option panda-syntax
-                //-     option paraiso-dark
-                //-     option paraiso-light
-                //-     option pastel-on-dark
-                //-     option railscasts
-                //-     option rubyblue
-                //-     option seti
-                //-     option shadowfox
-                //-     option solarized dark
-                //-     option solarized light
-                //-     option the-matrix
-                //-     option tomorrow-night-bright
-                //-     option tomorrow-night-eighties
-                //-     option ttcn
-                //-     option twilight
-                //-     option vibrant-ink
-                //-     option xq-dark
-                //-     option xq-light
-                //-     option yeti
-                //-     option yonce
-                //-     option zenburn
+
                 .form-group
                   label(for='') Select 
                   select#w.form-control.select2-multiple(name="tags" multiple="multiple")
@@ -81,17 +21,38 @@ block content
                     option(value='Node Js') Node Js         
                     option(value='Java Script') Java Script
                     option(value='Python') Python
+                .row
+                  .form-group.col-md-9
+                    input#exampleInputEmail1.form-control(type='text',
+                    name="code[0][desc]", aria-describedby='emailHelp', placeholder='Title')
+                     
+                  .form-group.col-md-3.selectlang
+                    select.form-control.form-control(name="code[0][codelang]")
+                      option(value="htmlmixed") Html
+                      option(value="text/css")  CSS
+                      option(value="text/javascript")  JavaScript
+                      option(value="text/x-sql")  SQl
+                      option(value="text/x-csharp")  C#
+                      option(value="text/x-python")  Python
+                      option(value="text/x-java")  Java
+                      option(value="text/x-php")  PHP
+                      option(value="text/x-c++src")  C++
+                      option(value="text/x-csrc")  C
+                      option(value="text/x-go")  Go
+                      option(value="text/x-rsrc")  R
+                      option(value="application/x-powershell")  PowerShell
+                      option(value="")  Others...
 
                 .form-group.note-body
-                  <label for="exampleFormControlTextarea1">Body</label>
-                  textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")
+                  textarea#code.code.form-control(rows='8',name='code[0][body]',style="margin: 10px;",value="")
                   
-
-                a.d-none.d-sm-inline-block.btn.btn-sm.btn-success.shadow-sm(id='addprogrammingnotebody')
-                  i.fas.fa-plus.fa-sm.text-white-50
-                  |  Add
-
-
-                button.btn.btn-primary.btn-user.btn-block(type='submit') Submit
+                .row
+                  .col-md-5
+                  .col-md-2
+                      a.btn.btn-outline-secondary.btn-block.btn-sm.btn-user(id='addprogrammingnotebody')
+                         i.fas.fa-plus.fa-sm
+                  .col-md-5
+                      
+                  button.btn.btn-primary.btn-user(type='submit') Submit
 
 

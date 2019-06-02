@@ -15,7 +15,7 @@
         }
     });
 
-    $(".OpenCloseNote").click(function () {
+    $('body').on('click', '.OpenCloseNote', function () {
         debugger;
         var selctor =$(this).parent().parent().children(".cardHeigth")
         var sele = $(this).parent().parent().parent();

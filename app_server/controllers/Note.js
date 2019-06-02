@@ -4,7 +4,7 @@ var noteModel = mongoose.model('NoteModel', noteClass.NoteModelSchema, 'noteMode
 
 
 module.exports.AddNote = function (req, res) {
-    tokenid=req.session.token;
+    tokenid = req.session.token;
     res.render("AddNote", { title: "Add Note " });
 };
 
@@ -15,12 +15,28 @@ module.exports.PostAddNote = function (req, res) {
     console.log(req.body)
     console.log("Tags:")
     console.log(req.body.tags)
+    let codes = req.body.code;
+    let length = codes.length;
 
+    var codesModel=[];
+    for (i = 0; i < length; i++) {
+        debugger;
+       var model = {
+            mainbody: codes[i].body,
+            porgrammingStylelanguge: codes[i].codelang,
+            description: codes[i].desc
+        }
+        codesModel.push(model);
+    }
     var note = new noteModel({
         title: req.body.title,
-        body: req.body.body,
-        tags: req.body.tags
+        tags: req.body.tags,
+        code: codesModel
     });
+
+   
+
+
 
     // save model to database
     note.save(function (err, note) {
@@ -33,26 +49,41 @@ module.exports.PostAddNote = function (req, res) {
 };
 // -----------------------------------------------------------------------------
 module.exports.Notes = async function (req, res) {
-    var page =1;
-    if(req.param('page')!==undefined)
-    {
-         page=req.param('page');
+   
+    // noteModel.find().skip(perPage * page).limit(perPage)
+    //     .then((doc) => {
+    //         res.render("Notes", { title: "Notes", model: doc, count: count, perPage: perPage, currentPage: page + 1 });
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+
+     res.render("Notes");
+};
+module.exports.GetNotes = async function (req, res) {
+    var page = 1;
+    if (req.param('page') !== undefined) {
+        page = req.param('page');
     }
     var count = await noteModel.count()
-    var perPage = 4   , page = Math.max(0,page-1)
-     
-    noteModel.find().skip(perPage * page) .limit(perPage)
-        .then((doc) => {
-            res.render("Notes", { title: "Notes", model: doc , count:count , perPage :perPage, currentPage:page+1 });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    var perPage = 4, page = Math.max(0, page - 1)
 
-    // res.render("Notes",{title:"Notes"});
+    title=""
+    if (req.param('title') !== undefined) {
+        title = req.param('title');
+    }
+    
+    noteModel.find({title: { $regex: '.*' + title + '.*' } }).skip(perPage * page).limit(perPage)
+    .then((doc) => {
+        res.send({ model: doc, count: count, perPage: perPage, currentPage: page + 1 });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 };
 
- module.exports.Note = async function (req, res) {
+
+module.exports.Note = async function (req, res) {
     var id = req.query.id;
     // console.log(id)
 
@@ -79,7 +110,7 @@ module.exports.LoadMore = function (req, res) {
 
     noteModel.find()
         .then((doc) => {
-            res.send( doc );
+            res.send(doc);
         })
         .catch((err) => {
             console.log(err);

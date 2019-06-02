@@ -29,53 +29,55 @@ block content
         
   
   //--------------------------------------------------------------------------
-  #banner.page-header(perPage= perPage , count= count,currentPage=currentPage)
-    //- h1= count
-  .row
-    each val in model
-        .col-lg-6
-          // Dropdown Card Example
-          .card.shadow.mb-4
-            // Card Header - Dropdown
-            .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-              a(style="text-decoration: none;", href="/Note?id=" + val.id)
-                 h6.m-0.font-weight-bold.text-primary=  val.title
-              a.OpenCloseNote(href="#")
-                i.fa.fa-arrows-alt.text-gray-400
-              //- a(href="/Note?id=" + val.id)
-              //-   i.fas.fa-external-link-square-alt
+  div#app
+    #banner.page-header
+      //- h1= count
+      //- h1 
+      //-   |{{ message }}
+      .row
+          .col-lg-6(v-for="item in boxmodel")
+            
+            // Dropdown Card Example
+            .card.shadow.mb-4
+              // Card Header - Dropdown
+              .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+                a(style="text-decoration: none;")
+                  h6.m-0.font-weight-bold.text-primary {{item.title}}
+                a.OpenCloseNote(href="#")
+                  i.fa.fa-arrows-alt.text-gray-400
+                //- a(href="/Note?id=" + val.id)
+                //-   i.fas.fa-external-link-square-alt
 
-              //- .dropdown.no-arrow
-              //-   a#dropdownMenuLink.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-              //-     i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
-              //-   .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink', x-placement='bottom-end', style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(17px, 18px, 0px);')
-              //-     .dropdown-header Dropdown Header:
-              //-     a.dropdown-item(href='#') Action
-              //-     a.dropdown-item(href='#') Another action
-              //-     .dropdown-divider
-              //-     a.dropdown-item(href='#') Something else here
-            // Card Body
-            .card-body.cardHeigth(model= model.id, style="")
-              each bodyVal in val.body
-                    if bodyVal
-                      textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
+                //- .dropdown.no-arrow
+                //-   a#dropdownMenuLink.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                //-     i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
+                //-   .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink', x-placement='bottom-end', style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(17px, 18px, 0px);')
+                //-     .dropdown-header Dropdown Header:
+                //-     a.dropdown-item(href='#') Action
+                //-     a.dropdown-item(href='#') Another action
+                //-     .dropdown-divider
+                //-     a.dropdown-item(href='#') Something else here
+              // Card Body
+              .card-body.cardHeigth( style="")
+                  div(v-for="code in item.code")
+                      h6 {{code.description}}
+                      textarea#code.code.form-control(rows='8',v-bind:lang="code.porgrammingStylelanguge" ,name='body',style="margin: 10px;",value=""){{code.mainbody}} 
                       br
-            .card-footer.text-muted
-               each tagVal in val.tags 
-                      span.tag=  tagVal
-      
-        //- .col-md-12
-        //-       .mc-wrapper(id= val.id, style="")
-        //-         h3.note-title= val.title
-        //-           a.toolbar.OpenCloseNote(href="#")
-        //-            <i class="fas fa-arrows-alt"></i>
-        //-           a.toolbar(href="/Note?id=" + val.id)
-        //-            <i class="fas fa-external-link-square-alt"></i>
-        //-         .moreContent
-        //-           each bodyVal in val.body
-        //-             if bodyVal
-        //-               textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
-        //-               br
-        //-         each tagVal in val.tags
-        //-                 span.tag=  tagVal
-  div#page(style="margin:20px;")
+                .card-footer.text-muted
+                   span.tag(v-for="tag in item.tags"){{tag}}
+        
+          //- .col-md-12
+          //-       .mc-wrapper(id= val.id, style="")
+          //-         h3.note-title= val.title
+          //-           a.toolbar.OpenCloseNote(href="#")
+          //-            <i class="fas fa-arrows-alt"></i>
+          //-           a.toolbar(href="/Note?id=" + val.id)
+          //-            <i class="fas fa-external-link-square-alt"></i>
+          //-         .moreContent
+          //-           each bodyVal in val.body
+          //-             if bodyVal
+          //-               textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
+          //-               br
+          //-         each tagVal in val.tags
+          //-                 span.tag=  tagVal
+    //- div#page(style="margin:20px;")

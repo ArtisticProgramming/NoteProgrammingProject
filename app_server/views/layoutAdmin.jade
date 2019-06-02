@@ -117,9 +117,9 @@ html(lang='en')
             // Topbar Search
             form.d-none.d-sm-inline-block.form-inline.mr-auto.ml-md-3.my-2.my-md-0.mw-100.navbar-search
               .input-group
-                input.form-control.bg-light.border-0.small(type='text', placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
+                input#searchBox.form-control.bg-light.border-0.small(type='text', placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
                 .input-group-append
-                  button.btn.btn-primary(type='button')
+                  button#searchBoxBtn.btn.btn-primary(type='button')
                     i.fas.fa-search.fa-sm
             // Topbar Navbar
             ul.navbar-nav.ml-auto
@@ -260,6 +260,10 @@ html(lang='en')
                     button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
                     a.btn.btn-primary(href='login.html') Logout
             // Bootstrap core JavaScript
+            
+            script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
             script(src='/vendor/jquery/jquery.min.js')
             script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
             // Core plugin JavaScript
@@ -278,13 +282,17 @@ html(lang='en')
             script(src='/vendor/codemirror/addon/fold/indent-fold.js')
             script(src='/vendor/codemirror/addon/fold/markdown-fold.js')
             script(src='/vendor/codemirror/addon/fold/comment-fold.js')
+            script(src='/vendor/codemirror/mode/xml/xml.js')
             script(src='/vendor/codemirror/mode/javascript/javascript.js')
             script(src='/vendor/codemirror/mode/css/css.js')
-            script(src='/vendor/codemirror/mode/htmlmixed/htmlmixed.js')
-            script(src='/vendor/codemirror/mode/htmlmixed/htmlmixed.js')
             script(src='/vendor/codemirror/mode/python/python.js')
             script(src='/vendor/codemirror/mode/sql/sql.js')
-
+            script(src='/vendor/codemirror/mode/clike/clike.js')
+            script(src='/vendor/codemirror/mode/go/go.js')
+            script(src='/vendor/codemirror/mode/r/r.js')
+            script(src='/vendor/codemirror/mode/php/php.js')
+            script(src='/vendor/codemirror/mode/powershell/powershell.js')
+            script(src='/vendor/codemirror/mode/htmlmixed/htmlmixed.js')
 
 
             script(src='/ThirdParty/select2-4.0.7/dist/js/select2.full.min.js')
