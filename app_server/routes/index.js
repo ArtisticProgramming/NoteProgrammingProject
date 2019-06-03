@@ -46,6 +46,7 @@ router.post('/PostAddNote',IsAuthenticated,ctrlNote.PostAddNote);
 router.get('/Notes',IsAuthenticated,ctrlNote.Notes);
 router.get('/Note',IsAuthenticated, ctrlNote.Note);
 router.get('/GetNotes',IsAuthenticated, ctrlNote.GetNotes);
+router.get('/DeleteNote',IsAuthenticated, ctrlNote.DeleteNote);
 
 router.get('/LoadMore', ctrlNote.LoadMore);
 

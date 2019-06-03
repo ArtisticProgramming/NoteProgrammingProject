@@ -9,6 +9,7 @@
 //         });
 // })
 var action = 'inactive';
+page = 1;
 var app = new Vue({
   el: '#app',
   data: {
@@ -41,61 +42,64 @@ var app = new Vue({
     for (i = 0; i < document.getElementsByClassName("code").length; i++) {
       $("textarea").removeClass("code");
     }
-    
+
 
   },
   methods: {
-    Hello() {
+    loadNote(page) {
       // alert("mounted")
+      var perPage = 4;
       axios
-        .get('/GetNotes')
+        .get('/GetNotes?page=' + page + "&perPage=" + perPage)
         .then(response => {
           // console.log(response.data),
           response.data.model.forEach(element => {
             this.boxmodel.push(element);
           });
           // console.log(boxmodel)
-           action = 'inactive';
+          action = 'inactive';
 
         }
         )
 
+    },
+
+    deleteNote(id, index) {
+      if (confirm("Wanna Delete?")) {
+        axios
+          .get('/DeleteNote?id=' + id)
+                .then(response => {
+                  this.boxmodel.splice(index, 1);
+                }
+          )
+      }
     }
   },
   mounted() {
     // alert("mounted")
-    axios
-      .get('/GetNotes')
-      .then(response => {
-        // console.log(response.data),
-        this.boxmodel = response.data.model;
-        // console.log(boxmodel)
-        debugger;
-
-      }
-      )
+    this.loadNote(page);
   }
 });
 
 // $(window).scroll(function () {
 
-  
+
 //   if ($(window).scrollTop() + $(window).height() > $(document).height() - 5) {
 //     // $(window).unbind('scroll');
 //     // alert("near bottom!");
 //     console.log(app)
-//     app.Hello();
+//     app.loadNote();
 //   }
 // }); 
 
-$(window).scroll(function(){
-  
-  if (($(window).scrollTop() + $(window).height() > $(document).height() - 5) && action == 'inactive')
-  {
-   action = 'active';
-  //  start = start + limit;
-   setTimeout(function(){
-    app.Hello();
-   }, 500);
+$(window).scroll(function () {
+
+  if (($(window).scrollTop() + $(window).height() > $(document).height() - 5) && action == 'inactive') {
+    action = 'active';
+    //  start = start + limit;
+    setTimeout(function () {
+      page = page + 1;
+      app.loadNote(page);
+    }, 500);
   }
- });
+});

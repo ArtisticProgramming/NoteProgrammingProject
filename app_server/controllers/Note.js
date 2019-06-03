@@ -18,10 +18,10 @@ module.exports.PostAddNote = function (req, res) {
     let codes = req.body.code;
     let length = codes.length;
 
-    var codesModel=[];
+    var codesModel = [];
     for (i = 0; i < length; i++) {
         debugger;
-       var model = {
+        var model = {
             mainbody: codes[i].body,
             porgrammingStylelanguge: codes[i].codelang,
             description: codes[i].desc
@@ -34,7 +34,7 @@ module.exports.PostAddNote = function (req, res) {
         code: codesModel
     });
 
-   
+
 
 
 
@@ -49,7 +49,7 @@ module.exports.PostAddNote = function (req, res) {
 };
 // -----------------------------------------------------------------------------
 module.exports.Notes = async function (req, res) {
-   
+
     // noteModel.find().skip(perPage * page).limit(perPage)
     //     .then((doc) => {
     //         res.render("Notes", { title: "Notes", model: doc, count: count, perPage: perPage, currentPage: page + 1 });
@@ -58,31 +58,44 @@ module.exports.Notes = async function (req, res) {
     //         console.log(err);
     //     });
 
-     res.render("Notes");
+    res.render("Notes");
 };
 module.exports.GetNotes = async function (req, res) {
-    var page = 1;
-    if (req.param('page') !== undefined) {
-        page = req.param('page');
-    }
-    var count = await noteModel.count()
-    var perPage = 4, page = Math.max(0, page - 1)
+    let page = req.query.page //req.param('page');
+    let perPage = parseInt(req.query.perPage); 
 
-    title=""
+    var count = await noteModel.count()
+    page = Math.max(0, page - 1)
+
+    title = ""
     if (req.param('title') !== undefined) {
         title = req.param('title');
     }
-    
-    noteModel.find({title: { $regex: '.*' + title + '.*' } }).skip(perPage * page).limit(perPage)
+
+    noteModel.find(/*{title: { $regex: '.*' + title + '.*' } }*/)
+        .skip(perPage * page).limit(perPage)
+        .then((doc) => {
+            res.send({ model: doc, count: count, perPage: perPage, currentPage: page });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
+module.exports.DeleteNote = async function (req, res) {
+    let id = req.query.id //req.param('page');
+    console.log(id );
+
+    noteModel.findOneAndDelete({_id:id}) 
     .then((doc) => {
-        res.send({ model: doc, count: count, perPage: perPage, currentPage: page + 1 });
+        console.log("success" );
+
+        res.send({ message:"success" });
     })
     .catch((err) => {
         console.log(err);
     });
-};
-
-
+}
 module.exports.Note = async function (req, res) {
     var id = req.query.id;
     // console.log(id)

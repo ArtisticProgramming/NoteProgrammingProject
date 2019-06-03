@@ -18,21 +18,21 @@ $(document).ready(function () {
         });
 
 
-        // debugger;
-        // var editArr = [];
-        // for (i = 0; i < document.getElementsByClassName("code").length; i++) {
-        //     var lang = $($(".code")[i]).attr("lang");
-        //     console.log("lang = " + lang);
-        //     var editor = CodeMirror.fromTextArea(document.getElementsByClassName("code")[i], {
-        //         mode: lang,
-        //         lineNumbers: true,
-        //         styleActiveLine: true,
-        //         matchBrackets: true,
-        //         viewportMargin: Infinity,
-        //     });
+        debugger;
+        var editArr = [];
+        for (i = 0; i < document.getElementsByClassName("code").length; i++) {
+            var lang = $($(".code")[i]).attr("lang");
+            console.log("lang = " + lang);
+            var editor = CodeMirror.fromTextArea(document.getElementsByClassName("code")[i], {
+                mode: lang,
+                lineNumbers: true,
+                styleActiveLine: true,
+                matchBrackets: true,
+                viewportMargin: Infinity,
+            });
 
-        //     editArr.push(editor)
-        // }
+            editArr.push(editor)
+        }
 
 
         $('#themeSelect').change(function () {
