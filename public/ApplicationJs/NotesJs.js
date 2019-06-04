@@ -86,7 +86,9 @@ var app = new Vue({
         axios
           .get('/DeleteNote?id=' + id)
           .then(response => {
+            debugger;
             this.boxmodel.splice(index, 1);
+            $$("[note-id="+id+"]").first().remove();
           }
           )
       }

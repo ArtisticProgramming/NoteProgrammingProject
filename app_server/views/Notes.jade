@@ -1,7 +1,5 @@
 extends layoutAdmin
 
-
-
 block content
   style.
     .cardHeigth{
@@ -32,6 +30,7 @@ block content
     }
     .deleteNoteIcon:hover{
       color: #9f0101 !important;
+      cursor : pointer;
     }
         
   
@@ -49,7 +48,7 @@ block content
                  i.fas.fa-search.fa-sm
       br
       .row
-          .col-lg-6(v-for="(item, index) in boxmodel")
+          .col-lg-6(v-for="(item, index) in boxmodel",v-bind:note-id="item._id")
             
             // Dropdown Card Example
             .card.shadow.mb-4
