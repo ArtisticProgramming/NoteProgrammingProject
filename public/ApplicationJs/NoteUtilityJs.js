@@ -16,11 +16,12 @@
     });
 
     $('body').on('click', '.OpenCloseNote', function () {
+        var heigth="100px";
         debugger;
         var selctor =$(this).parent().parent().children(".cardHeigth")
         var sele = $(this).parent().parent().parent();
         var h = $(selctor).css("height");
-        if (h == "200px") {
+        if (h == heigth) {
             $(selctor).css('height', 'auto');
             $(selctor).css('overflow-y', 'hidden');
             $(sele).removeClass("col-lg-6")
@@ -30,7 +31,7 @@
             //   });
 
         } else {
-            $(selctor).css('height', '200px');
+            $(selctor).css('height', heigth);
             $(selctor).css('overflow-y', 'scroll');
             $(sele).removeClass("col-lg-12")
             $(sele).addClass("col-lg-6")

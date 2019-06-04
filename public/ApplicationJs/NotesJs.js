@@ -14,6 +14,7 @@ var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!',
+    searchTextBox: "",
     boxmodel: [],
     // todos: [
     //   { text: 'Learn JavaScript' },
@@ -22,6 +23,7 @@ var app = new Vue({
     // ]
 
   },
+
   updated: function () {
     // alert("dd")
     var editArr = [];
@@ -46,16 +48,31 @@ var app = new Vue({
 
   },
   methods: {
-    loadNote(page) {
+    search: function () {
+      page = 1;
+      this.loadNote(page, true);
+
+    },
+    loadNote(page, reset) {
       // alert("mounted")
       var perPage = 4;
+
+      title = "";
+      console.log(this.searchTextBox)
+      if (this.searchTextBox !== undefined && this.searchTextBox != "")
+        title = "&title=" + this.searchTextBox ;
+
       axios
-        .get('/GetNotes?page=' + page + "&perPage=" + perPage)
+        .get('/GetNotes?page=' + page + "&perPage=" + perPage + title)
         .then(response => {
           // console.log(response.data),
-          response.data.model.forEach(element => {
-            this.boxmodel.push(element);
-          });
+          if (reset)
+            this.boxmodel = response.data.model
+          else {
+            response.data.model.forEach(element => {
+              this.boxmodel.push(element);
+            });
+          }
           // console.log(boxmodel)
           action = 'inactive';
 
@@ -68,9 +85,9 @@ var app = new Vue({
       if (confirm("Wanna Delete?")) {
         axios
           .get('/DeleteNote?id=' + id)
-                .then(response => {
-                  this.boxmodel.splice(index, 1);
-                }
+          .then(response => {
+            this.boxmodel.splice(index, 1);
+          }
           )
       }
     }

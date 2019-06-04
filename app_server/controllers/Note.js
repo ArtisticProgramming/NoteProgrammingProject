@@ -72,7 +72,7 @@ module.exports.GetNotes = async function (req, res) {
         title = req.param('title');
     }
 
-    noteModel.find(/*{title: { $regex: '.*' + title + '.*' } }*/)
+    noteModel.find({title: { $regex: '.*' + title + '.*' } })
         .skip(perPage * page).limit(perPage)
         .then((doc) => {
             res.send({ model: doc, count: count, perPage: perPage, currentPage: page });
@@ -113,9 +113,8 @@ module.exports.Note = async function (req, res) {
     // });
     ////Seconde way with promiss and await
     var mainModel = await noteModel.findById({ _id: new ObjectId(id) })
-    console.log(mainModel)
-    console.log("outside Promisss")
-    res.render("Note", { title: "Note", model: mainModel });
+
+    res.render("./Note", { title: "Note", model: mainModel });
 };
 
 

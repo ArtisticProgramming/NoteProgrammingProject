@@ -5,7 +5,7 @@ extends layoutAdmin
 block content
   style.
     .cardHeigth{
-      height: 200px;
+      height: 100px;
       overflow-y: scroll;
     }
      ::-webkit-scrollbar {
@@ -41,6 +41,13 @@ block content
       //- h1= count
       //- h1 
       //-   |{{ message }}
+       .row
+      .input-group
+        input.form-control.border-0.small(type='text',v-model="searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
+        .input-group-append
+         button.btn.btn-primary(type='button',v-on:click="search()")
+                 i.fas.fa-search.fa-sm
+      br
       .row
           .col-lg-6(v-for="(item, index) in boxmodel")
             
