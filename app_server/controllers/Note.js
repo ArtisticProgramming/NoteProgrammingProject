@@ -114,7 +114,7 @@ module.exports.Note = async function (req, res) {
     ////Seconde way with promiss and await
     var mainModel = await noteModel.findById({ _id: new ObjectId(id) })
 
-    res.render("./Note", { title: "Note", model: mainModel });
+    res.render("Note", { title: "Note", model: mainModel });
 };
 
 
@@ -128,5 +128,6 @@ module.exports.LoadMore = function (req, res) {
             console.log(err);
         });
 
+        
     req.send("");
 }
