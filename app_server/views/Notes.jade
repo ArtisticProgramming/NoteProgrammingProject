@@ -48,7 +48,7 @@ block content
                  i.fas.fa-search.fa-sm
       br
       .row
-          .col-lg-6(v-for="(item, index) in boxmodel",v-bind:note-id="item._id")
+          .col-lg-6(v-for="(item, index) in boxmodel",v-bind:note-id="item._id", :key="item._id")
             
             // Dropdown Card Example
             .card.shadow.mb-4
@@ -75,7 +75,8 @@ block content
               .card-body.cardHeigth( style="")
                   div(v-for="code in item.code")
                       h6 {{code.description}}
-                      textarea#code.code.form-control(rows='8',v-bind:lang="code.porgrammingStylelanguge" ,name='body',style="margin: 10px;",value=""){{code.mainbody}} 
+                      code-mirror.form-control(v-bind:body="code.mainbody",rows='8' ,v-bind:lang="code.porgrammingStylelanguge", :key="componentKey" , v-bind:id="code._id") 
+                      //- textarea#code.code.form-control(rows='8',v-bind:lang="code.porgrammingStylelanguge" ,name='body',style="margin: 10px;",value=""){{code.mainbody}} 
                       br
                 .card-footer.text-muted
                   a.deleteNote(style=("float: right;"), v-on:click="deleteNote(item._id,index)")

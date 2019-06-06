@@ -11363,6 +11363,7 @@ a:focus {
   .sidebar.toggled .nav-item .collapse,
   .sidebar.toggled .nav-item .collapsing {
     margin: 0;
+    z-index: 1000;
   }
   .sidebar.toggled .nav-item:last-child {
     margin-bottom: 1rem;

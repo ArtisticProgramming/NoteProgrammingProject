@@ -67,7 +67,7 @@
       $('.sidebar .collapse').collapse('hide');
     };
   }
-  //toggleSidebar();
+  toggleSidebar();
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function (e) {
     toggleSidebar();
