@@ -191,7 +191,7 @@ var app = new Vue({
 
             this.$nextTick(function () {
               // this.$forceUpdate();
-              alert("s")
+              //alert("s")
               // this.$forceUpdate();
               this.componentKey += 1;  
               // DOM is now updated
