@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "npm-run-all --parallel  watch:server ",
+    "start": "nodemon ./bin/www  ",
     "_start": "npm-run-all --parallel watch:build watch:server ",
     "watch:build": "webpack ",
     "watch:server-old": "nodemon ./bin/www \"./dist/main.js\" --watch \"./dist\"",
@@ -35,7 +35,8 @@
     "request": "^2.88.0",
     "select2": "^4.0.7",
     "serve-favicon": "^2.5.0",
-    "webpack-cli": "^3.3.4"
+    "webpack-cli": "^3.3.4",
+    "webpack": "^4.33.0"
   },
   "devDependencies": {
     "browser-sync": "2.26.5",
