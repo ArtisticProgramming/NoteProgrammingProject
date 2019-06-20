@@ -10,15 +10,23 @@ html(lang='en')
     // Custom fonts for this template
     link(href='/vendor/fontawesome-free/css/all.min.css', rel='stylesheet', type='text/css')
     link(href='https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i', rel='stylesheet')
-    link(rel='stylesheet', href='/vendor/codemirror/lib/codemirror.css')
+    link(rel='stylesheet', href='/vendor/codemirror/lib/codemirror.min.css')
     link(rel='stylesheet', href='/vendor/codemirror/addon/fold/foldgutter.css')
-    link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2.min.css')
-    link(rel='stylesheet', href='/ThirdParty/select2-4.0.7/dist/css/select2-bootstrap.min.css')
-    link(rel='stylesheet', href='/ThirdParty/simplePagination.js-master/simplePagination.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    //- link(rel='stylesheet', href='/vendor/select2-4.0.7/dist/css/select2.min.css')
+    //- link(rel='stylesheet', href='/vendor/selectize/dist/css/selectize.css')
+    //- link(rel='stylesheet', href='/vendor/selectize/dist/css/selectize.bootstrap4.css')
+
+    //-link(rel='stylesheet', href='/vendor/select2-4.0.7/dist/css/select2-bootstrap.min.css')
+    //- link(rel='stylesheet', href='/vendor/datatables/dataTables.bootstrap4.min.css')
+    link(rel='stylesheet', href='/vendor/select2-3.5.4/select2.css')
+    link(rel='stylesheet', href='/vendor/select2-3.5.4/select2-bootstrap.css')
+
+    link(rel='stylesheet', href='/css/style.css')
+    
     // Custom styles for this template
     link(href='/css/sb-admin-2.min.css', rel='stylesheet')
     script(src='/vendor/jquery/jquery.min.js')
+    //- script(src='../jq.js')
 
   body#page-top
     // Page Wrapper
@@ -80,6 +88,7 @@ html(lang='en')
             .bg-white.py-2.collapse-inner.rounded
               h6.collapse-header Application Menu:
               a.collapse-item(href='/Notes/') Notes
+              a.collapse-item(href='/NoteList/') Note List
               a.collapse-item(href='/AddNote/') Add Note
               a.collapse-item(href='/Test/') Test
               a.collapse-item(href='/about/') About
@@ -263,47 +272,31 @@ html(lang='en')
                     a.btn.btn-primary(href='login.html') Logout
             // Bootstrap core JavaScript
             
-            script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+            //- script(src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js')
+            script(src='/vendor/vue/vue.min.js')
             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
             script(src='/vendor/bootstrap/js/bootstrap.bundle.min.js')
-            // Core plugin JavaScript
             script(src='/vendor/jquery-easing/jquery.easing.min.js')
-            // Custom scripts for all pages
-            script(src='/js/sb-admin-2.js')
-                script(src='/javascripts/validation.js')
-            script(src='/vendor/codemirror/lib/codemirror.js')
-            //- script(src='/vendor/codemirror/mode/xml/xml.js')
-            script(src='/vendor/codemirror/addon/selection/active-line.js')
 
-            script(src='/vendor/codemirror/addon/fold/foldcode.js')
-            script(src='/vendor/codemirror/addon/fold/foldgutter.js')
-            script(src='/vendor/codemirror/addon/fold/brace-fold.js')
-            script(src='/vendor/codemirror/addon/fold/xml-fold.js')
-            script(src='/vendor/codemirror/addon/fold/indent-fold.js')
-            script(src='/vendor/codemirror/addon/fold/markdown-fold.js')
-            script(src='/vendor/codemirror/addon/fold/comment-fold.js')
-            script(src='/vendor/codemirror/mode/xml/xml.js')
-            script(src='/vendor/codemirror/mode/javascript/javascript.js')
-            script(src='/vendor/codemirror/mode/css/css.js')
-            script(src='/vendor/codemirror/mode/python/python.js')
-            script(src='/vendor/codemirror/mode/sql/sql.js')
-            script(src='/vendor/codemirror/mode/clike/clike.js')
-            script(src='/vendor/codemirror/mode/go/go.js')
-            script(src='/vendor/codemirror/mode/r/r.js')
-            script(src='/vendor/codemirror/mode/php/php.js')
-            script(src='/vendor/codemirror/mode/powershell/powershell.js')
-            script(src='/vendor/codemirror/mode/htmlmixed/htmlmixed.js')
+            script(src='/vendor/codemirror/lib/codemirror.min.js')
+            script(src='/compressed/code-mirror-plugin-bundle.js') 
+           
+            //- script(src='/vendor/select2-4.0.7/dist/js/select2.full.min.js')
+            script(src='/vendor/selectize/dist/js/standalone/selectize.js')
+            script(src='/vendor/select2-3.5.4/select2.min.js')
 
 
-            script(src='/ThirdParty/select2-4.0.7/dist/js/select2.full.min.js')
-            script(src='/ApplicationJs/NotesJs.js')
-            script(src='/ApplicationJs/NoteUtilityJs.js')
 
-            script(src='/ThirdParty/jQuery-Plugin-For-SEO-Friendly-Hiding-of-Long-Text-moreContent-js/jquery.morecontent.min.js')
-            script(src='/ThirdParty/simplePagination.js-master/jquery.simplePagination.js')
-            // Page level plugins
-            //- script(src='vendor/chart.js/Chart.min.js')
-            // Page level custom scripts
-            //- script(src='/js/demo/chart-area-demo.js')
-            //- script(src='/js/demo/chart-pie-demo.js')
+            //- script(src='/app/AddNoteJs.js')
+            //- script(src='/app/NotesJs.js')
+            //- script(src='/app/NoteUtilityJs.js')
+            //- script(src='/app/sb-admin-2.js')
+            //- script(src='/app/test.js')
+
+            script(src='/vendor/datatables/jquery.dataTables.min.js')
+            script(src='/vendor/datatables/dataTables.bootstrap4.min.js')
+
+
+            script(src='../dist/main.js') 
+            

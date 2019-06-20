@@ -1,36 +1,57 @@
 var mongoose = require('mongoose');
-var noteClass = require('../../app_api/models/note');
+var noteClass = require('../../models/note');
 var noteModel = mongoose.model('NoteModel', noteClass.NoteModelSchema, 'noteModel');
+var BasicDataClass = require('../../models/basicData');
+var BasicDataModel = mongoose.model('BasicDataModel', BasicDataClass.BasicDataSchema, 'basicDataModel');
 
+var LINQ = require('node-linq').LINQ;
+var path = require('path');
 
 module.exports.AddNote = function (req, res) {
     tokenid = req.session.token;
     res.render("AddNote", { title: "Add Note " });
 };
 
-module.exports.PostAddNote = function (req, res) {
+module.exports.PostAddNote =async function (req, res) {
     // a document instance
     console.log("--------------------------------")
 
     console.log(req.body)
+    console.log(req.body.model)
     console.log("Tags:")
     console.log(req.body.tags)
-    let codes = req.body.code;
+    let codes = req.body.model.model;
     let length = codes.length;
+
+    if (req.body.model.projectType.id == '$*NewTag*$') {
+         AddBasicData(req.body.model.projectType.text , 1 , req.session.profileId );
+    }
+
+    if (req.body.model.technologyType.id == '$*NewTag*$') {
+         AddBasicData(req.body.model.technologyType.text , 2 ,req.session.profileId);
+    }
+
+    if (req.body.model.noteType.id == '$*NewTag*$') {
+         AddBasicData(req.body.model.noteType.text , 3 ,req.session.profileId );
+    }
 
     var codesModel = [];
     for (i = 0; i < length; i++) {
         debugger;
         var model = {
-            mainbody: codes[i].body,
-            porgrammingStylelanguge: codes[i].codelang,
+            mainbody: codes[i].mainbody,
+            porgrammingStylelanguge: codes[i].lang,
             description: codes[i].desc
         }
         codesModel.push(model);
     }
+
     var note = new noteModel({
-        title: req.body.title,
-        tags: req.body.tags,
+        title: req.body.model.title,
+        userProfileId: req.session.profileId,
+        projectName: req.body.model.ProjectType,
+        // Technology:"req.body.Technology[0],"
+        // Type:req.body.Type[0],
         code: codesModel
     });
 
@@ -41,28 +62,25 @@ module.exports.PostAddNote = function (req, res) {
     // save model to database
     note.save(function (err, note) {
         if (err) return console.error(err);
+        console.log(note)
         console.log(note.name + " saved to note collection.");
+        res.send({ result: "success" })
     });
 
 
-    res.render("AddNote", { title: "Add Note" });
+    // res.render("AddNote", { title: "Add Note" });
 };
 // -----------------------------------------------------------------------------
 module.exports.Notes = async function (req, res) {
-
-    // noteModel.find().skip(perPage * page).limit(perPage)
-    //     .then((doc) => {
-    //         res.render("Notes", { title: "Notes", model: doc, count: count, perPage: perPage, currentPage: page + 1 });
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-
+    console.log("profileId => ")
+    console.log(req.session.profileId)
     res.render("Notes");
 };
+
+
 module.exports.GetNotes = async function (req, res) {
     let page = req.query.page //req.param('page');
-    let perPage = parseInt(req.query.perPage); 
+    let perPage = parseInt(req.query.perPage);
 
     var count = await noteModel.count()
     page = Math.max(0, page - 1)
@@ -71,8 +89,8 @@ module.exports.GetNotes = async function (req, res) {
     if (req.param('title') !== undefined) {
         title = req.param('title');
     }
-
-    noteModel.find({title: { $regex: '.*' + title + '.*' } })
+    // $options:'i' ==> it is for  Case-insensitive 
+    noteModel.find({ title: { $regex: '.*' + title + '.*', $options: 'i' } })
         .skip(perPage * page).limit(perPage)
         .then((doc) => {
             res.send({ model: doc, count: count, perPage: perPage, currentPage: page });
@@ -84,17 +102,17 @@ module.exports.GetNotes = async function (req, res) {
 
 module.exports.DeleteNote = async function (req, res) {
     let id = req.query.id //req.param('page');
-    console.log(id );
+    console.log(id);
 
-    noteModel.findOneAndDelete({_id:id}) 
-    .then((doc) => {
-        console.log("success" );
+    noteModel.findOneAndDelete({ _id: id })
+        .then((doc) => {
+            console.log("success");
 
-        res.send({ message:"success" });
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+            res.send({ message: "success" });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 module.exports.Note = async function (req, res) {
     var id = req.query.id;
@@ -118,16 +136,52 @@ module.exports.Note = async function (req, res) {
 };
 
 
-module.exports.LoadMore = function (req, res) {
+module.exports.NoteList = function (req, res) {
 
-    noteModel.find()
-        .then((doc) => {
-            res.send(doc);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
 
-        
-    req.send("");
+    var files = ['test.txt', 'choni.txt', 'legacy.zip', 'secrets.txt', 'etc.rar'];
+    var arr = new LINQ(files)
+        .Where(function (file) { return file === 'secrets.txt'; })
+        .OrderBy(function (file) { return file; })
+        .ToArray();
+    console.log("Aftre Filter")
+    console.log(arr)
+
+
+    let page = req.query.page //req.param('page');
+    let perPage = parseInt(req.query.perPage);
+
+    // var count = await noteModel.count()
+    // page = Math.max(0, page - 1)
+
+    // title = ""
+    // if (req.param('title') !== undefined) {
+    //     title = req.param('title');
+    // }
+    // // $options:'i' ==> it is for  Case-insensitive 
+    // noteModel.find({title: { $regex: '.*' + title + '.*' ,$options:'i'} })
+    //     .skip(perPage * page).limit(perPage)
+    //     .then((doc) => {
+    //         res.send({ model: doc, count: count, perPage: perPage, currentPage: page });
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+
+    res.render("noteList", { title: "Note", model: {} });
+}
+
+
+AddBasicData = function(text,type,profileId)
+{
+    var basicData = new BasicDataModel({
+        title: text,
+        userProfileId: profileId,
+        type:type
+    });
+
+    basicData.save(function (err, data) {
+        if (err) return console.error(err);
+        console.log("BasicData saved to note collection.");
+    });
 }

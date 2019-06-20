@@ -9,12 +9,9 @@ var auth = require('./Config/auth');
 cookieParser = require('cookie-parser'),
 cookieSession = require('cookie-session');
 //---------Passport--------------
-
-
-require('./app_api/models/db');
-
+require('./models/db');
 var routes = require('./app_server/routes/index');
-var routesApi = require('./app_api/routes/index');
+// var routesApi = require('./routes/index');
 // var users = require('./app_server/routes/users');
 
 var app = express();
@@ -42,7 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/api', routesApi);
+// app.use('/api', routesApi);
 // app.use('/users', users);
 
 // catch 404 and forward to error handler
@@ -76,14 +73,5 @@ app.use(function(err, req, res, next) {
     });
 });
 
-// app.all('*',function(req,res,next){
-//     if(req.isAuthenticated()){
-//         console.log("-----------------------req.isAuthenticated() = "+ req.isAuthenticated())
-//         next();
-//     }else{
-//         console.log("----------------------req.isAuthenticated() = "+ req.isAuthenticated())
-//         next(new Error(401)); // 401 Not Authorized
-//     }
-// });
 
 module.exports = app;

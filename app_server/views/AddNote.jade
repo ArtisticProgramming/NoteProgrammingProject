@@ -1,33 +1,70 @@
 extends layoutAdmin
             
 block content
-    .row#app
+    .row#anapp
       .col-md-12.col-sm-12
         .card.mb-4
-          .card-header
-            | Add Note
+          .card-header{{message}}
           .card-body
              form(role="form", action="/PostAddNote", method="post")
                 .form-group
                   label(for='exampleInputEmail1' ) Title
-                  input#exampleInputEmail1.form-control(type='text', aria-describedby='emailHelp', placeholder='Title', name='title')
+                  input.form-control(type='text', aria-describedby='', v-model="nodeModel.title", placeholder='Title', name='title')
 
-                .form-group
-                  label(for='') Select 
-                  select#w.form-control.select2-multiple(name="tags" multiple="multiple")
-                    option(value='Sql') Sql
-                    option(value=' C#') C#         
-                    option(value='Java') Java
-                    option(value='Node Js') Node Js         
-                    option(value='Java Script') Java Script
-                    option(value='Python') Python
+                //- .form-group
+                //-   label(for='') Select 
+                //-   input#e12(name="tags" multiple="multiple",type="hidden")
+
+                //- select#w2.form-control(multiple='', data-select2-id='10', tabindex='-1', aria-hidden='true')
+                //-   option(data-select2-id='14') red
+                //-   option(data-select2-id='15') blue
+                //-   option(data-select2-id='16') green
+                //-   option(value='rerewr', data-select2-id='57', data-select2-tag='true') rerewr
+                //- select#tags(multiple='multiple')
+                //-     option(selected='selected') Kerry
+                //-     option(selected='selected') Cork
                 .row
-                  .form-group.col-md-9
-                    input#exampleInputEmail1.form-control(type='text',
+                  //- .form-group.col-md-3
+                  //-     <span>Hello</span>
+
+                  //-     //- label(for='') Project Type 
+                  //-     selectize#type.form-control(type="text",
+                  //-      multiple="multiple",url="/GetProjectTypes", @input-data="updateProjectType")
+                  //-         //- option(value='1') General
+                  //-         //- option(value='2') BCMLOGIC
+                  //-         //- option(value='3') Note
+                  //- .form-group-4.col-md-3
+                  //-     <span>Hello</span>
+
+                  //-     //- label(for='') Technology, Libery, Framework 
+                  //-     selectize#type.form-control(type="text", multiple="multiple", @input-data="updateTechnology")
+                  //-         option(value='1') SQL
+                  //-         option(value='2') ASP.Net
+                  //-         option(value='3') NodeJS
+                  //- .form-group-4.col-md-3
+                  //-     <span>Hello</span>
+                  //-     selectize#type.form-control(type="text", multiple="multiple", @input-data="updateType")
+                  //-         option(value='1') Pattern
+                  //-         option(value='2') Fixing Bug
+                  //-         option(value='3') Learning      
+                  //-         option(value='4') Document   
+                  .form-group-4.col-md-4
+                        <span>Project: </span>
+                        input#project.form-control
+                  .form-group-4.col-md-4
+                        <span>Technology, Libery, Framework:</span>
+                        input#technology.form-control
+                  .form-group-4.col-md-4
+                        <span>Note Type:</span>
+                        input#noteType.form-control
+                br
+                .row(v-for="(item, index) in nodeModel.model")
+                  .form-group.col-md-10
+                    input#exampleInputEmail1.form-control(type='text', v-model="item.desc"
                     name="code[0][desc]", aria-describedby='emailHelp', placeholder='Title')
                      
-                  .form-group.col-md-3.selectlang
-                    select.form-control.form-control(name="code[0][codelang]")
+                  .form-group.col-md-2.selectlang
+                    select.form-control.form-control(name="code[0][codelang]",v-model="item.lang")
                       option(value="htmlmixed") Html
                       option(value="text/css")  CSS
                       option(value="text/javascript")  JavaScript
@@ -42,19 +79,20 @@ block content
                       option(value="text/x-rsrc")  R
                       option(value="application/x-powershell")  PowerShell
                       option(value="")  Others...
+                  .form-group.col-md-12.note-body
+                    code-mirror.form-control(v-bind:body="item.mainbody",rows='8' ,style="margin: 10px;"
+                     v-bind:lang="item.lang",v-bind:index="index", :key="componentKey" ,@input-text-area="updateCodeMirrorText" 
+                    ) 
 
-                .form-group.note-body
-                  textarea#code.code.form-control(rows='8',name='code[0][body]',style="margin: 10px;",value="")
-                  
                 .row
                   .col-md-5
                   .col-md-2
-                      a.btn.btn-outline-secondary.btn-block.btn-sm.btn-user(id='addprogrammingnotebody')
-                         i.fas.fa-plus.fa-sm
+                      a.btn.btn-outline-secondary.btn-block.btn-sm.btn-user(id='', v-on:click="add()")
+                          i.fas.fa-plus.fa-sm
                   .col-md-5
                       
-                  button.btn.btn-primary.btn-user(type='submit') Submit
-     script(type='text/javascript' , src='/ApplicationJs/AddNoteJs.js')
+              button.btn.btn-primary.btn-user(type='button', v-on:click="submit()") Submit
+    //-  script(type='text/javascript' , src='/ApplicationJs/AddNoteJs.js')
     
 
   

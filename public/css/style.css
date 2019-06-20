@@ -1,0 +1,123 @@
+/* .review {padding-bottom: 5px;}
+.panel-body.review-container {padding-top: 0;}
+.review-header {margin-bottom: 10px;}
+.reviewAuthor {margin: 0 5px;}
+.reviewTimestamp {color: #ccc;}
+
+.label-facility {margin-right: 2px}
+.rating-stars {margin-left: 3px;}
+#filter {margin-left: 4px;} */
+
+.CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+  
+
+  /* ---------------------------------------------------------
+   */
+.mc-wrapper {
+    background: white;
+    box-shadow: 0 2px 2px 1px rgba(92, 81, 81, 0.38);
+    margin-bottom: 15px;
+}
+.note-title{
+      padding: 4px 10px;
+      color: white;
+       background-color: #251486;
+}
+.moreContent {
+        padding: 10px;
+        position: relative;
+        overflow-y: scroll;
+        height: 100px;
+    }
+.moreContentFull {
+      padding: 10px;
+      position: relative;
+      height: auto;
+
+}
+.tag {
+      padding: 0px 5px;
+      background-color: #1d35ad;
+      margin: 2px;
+      color: white;
+      border-radius: 4px;
+      font-size: smaller;
+}
+.toolbar{
+  float:right;
+  color: #e5e5e5;
+  margin: 0px 5px;
+}
+/* -----------------    */
+/* only demo styles */
+
+body {
+  font-family: Raleway;
+}
+
+/* end only demo styles */
+
+.checkbox-custom, .radio-custom {
+    opacity: 0;
+    position: absolute;   
+}
+
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+
+    text-align: center;
+}
+.checkbox-custom + .checkbox-custom-label:before {
+    content: "\f02e";
+    font-weight: 900;
+    font-size: 15px;
+    font-family: 'Font Awesome\ 5 Free';
+    background: #ffffff;
+    color: #a5a5a5;
+}
+
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    content: "\f02e";
+    font-weight: 900;
+    font-size: 15px;
+    font-family: 'Font Awesome\ 5 Free';
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.radio-custom + .radio-custom-label:before {
+    border-radius: 50%;
+}
+
+.radio-custom:checked + .radio-custom-label:before {
+    content: "\f00c";
+    font-family: 'FontAwesome';
+    color: #bbb;
+}
+
+.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
+  outline: 1px solid #ddd; /* focus style */
+}
+

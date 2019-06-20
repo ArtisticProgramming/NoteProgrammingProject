@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var testClass = require('../../app_api/models/test');
+var testClass = require('../../models/test');
 var TestModel = mongoose.model('TestModel', testClass.TestModelSchema, 'testModel');
 
 
