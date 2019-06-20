@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "___start": "npm-run-all --parallel  watch:server ",
-    "start": "npm-run-all --parallel watch:build watch:server ",
+    "start": "npm-run-all --parallel  watch:server ",
+    "_start": "npm-run-all --parallel watch:build watch:server ",
     "watch:build": "webpack ",
     "watch:server-old": "nodemon ./bin/www \"./dist/main.js\" --watch \"./dist\"",
     "watch:server": "nodemon ./bin/www ",
