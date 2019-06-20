@@ -53,13 +53,12 @@ var app = new Vue({
 
     },
     OpenCloseNote(id){
-      alert("dd")
       var heigth="100px";
       debugger;
-      $( "input[value='Hot Fuzz']" )
+      $( "#oc-"+id )
       console.log($(this).parent().parent().children(".cardHeigth"))
-      var selctor =$(this).parent().parent().children(".cardHeigth")
-      var sele = $(this).parent().parent().parent();
+      var selctor =$( "#oc-"+id );
+      var sele = $(selctor).parent().parent()
       var h = $(selctor).css("height");
       if (h == heigth) {
           $(selctor).css('height', 'auto');

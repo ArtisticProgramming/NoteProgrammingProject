@@ -3,6 +3,19 @@
     window.noteUtilityJs = window.noteUtilityJs || {};
   
 
+    var editArr = [];
+    for (i = 0; i < document.getElementsByClassName("mirrorCode").length; i++) {
+      var lang = $($(".mirrorCode ")[i]).attr("lang");
+      console.log("lang = " + lang);
+      var editor = CodeMirror.fromTextArea(document.getElementsByClassName("mirrorCode")[i], {
+        mode: lang,
+        lineNumbers: true,
+        styleActiveLine: true,
+        matchBrackets: true,
+        viewportMargin: Infinity,
+      });
+      editArr.push(editor)
+    }
 
     $(document).ready(function() {
         // Setup - add a text input to each footer cell

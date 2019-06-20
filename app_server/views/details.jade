@@ -33,9 +33,9 @@ block content
                     if code.description
                       h6= code.description
                     if code.mainbody
-                      textarea#code.code.form-control(rows='8',lang=code.porgrammingStylelanguge ,name='body',style="margin: 10px;",value="")= code.mainbody
+                      textarea#code.mirrorCode.form-control(rows='8',lang=code.porgrammingStylelanguge ,name='body',style="margin: 10px;",value="")= code.mainbody
                       br
           .card-footer.text-muted
-               each tagVal in model.tags 
-                      span.tag=  tagVal
+              //-  each tagVal in model.tags 
+              //-         span.tag=  tagVal
      script(type='text/javascript' , src='/ApplicationJs/AddNoteJs.js')

@@ -26,6 +26,7 @@ module.exports = {
   plugins: [
     new NodemonPlugin(), // Dong
   ],
+  devtool: "#inline-source-map",
   module: {
     rules: [
       {

@@ -1,6 +1,7 @@
 extends layoutAdmin
             
 block content
+
     .row#anapp
       .col-md-12.col-sm-12
         .card.mb-4
@@ -56,7 +57,7 @@ block content
                         input#technology.form-control
                   .form-group-4.col-md-4
                         <span>Note Type:</span>
-                        input#noteType.form-control
+                        input#nType.form-control
                 br
                 .row(v-for="(item, index) in nodeModel.model")
                   .form-group.col-md-10
@@ -92,7 +93,7 @@ block content
                   .col-md-5
                       
               button.btn.btn-primary.btn-user(type='button', v-on:click="submit()") Submit
-    //-  script(type='text/javascript' , src='/ApplicationJs/AddNoteJs.js')
     
+  
 
   

@@ -1,5 +1,4 @@
 extends layoutAdmin
-
 block content
   style.
     .cardHeigth{
@@ -32,22 +31,14 @@ block content
       color: #9f0101 !important;
       cursor : pointer;
     }
-        
+    .card-footer span{
+      margin-right:5px;
+    }
   
   //--------------------------------------------------------------------------
   div#app
     #banner.page-header
-      //- h1= count
-      //- h1 
-      //-   |{{ message }}
-       .row
-       form.needs-validation(novalidate='')
 
-         form.form-inline
-      //- .form-group.mb-2.col-md-4
-      //-   input#inputSearch.form-control(type='text',v-model="searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
-      //- button.btn.btn-primary.mb-3(v-on:click="search()") 
-      //-     i.fas.fa-search.fa-sm
       .form-row   
         div
           input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox')
@@ -57,68 +48,31 @@ block content
           input#validationCustom01.form-control(type='text',v-model="searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
           .valid-feedback
             | Looks good!
-     
-        //- .col-md-1.mb3
-        //-   input#invalidCheck.form-check-input(type='checkbox', value='', required='')
         button.btn.btn-primary.mb-3(type='button',v-on:click="search()")
                  i.fas.fa-search.fa-sm
-
-   
-
-      //- .input-group
-      //-   input.form-control.border-0.small(type='text',v-model="searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
-      //-   .input-group-append
-      //-    button.btn.btn-primary(type='button',v-on:click="search()")
-      //-            i.fas.fa-search.fa-sm
       .row
-          .col-lg-6(v-for="(item, index) in boxmodel",v-bind:note-id="item._id", :key="item._id",v-on:dblclick="OpenCloseNote(item._id)")
+          .col-lg-6(v-for="(item, index) in boxmodel",v-bind:note-id="item._id", :key="item._id")
             
-            // Dropdown Card Example
+            //- // Dropdown Card Example
             .card.shadow.mb-4
-              // Card Header - Dropdown
-              .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-                a(v-bind:href="'/Note?id='+item._id", style="text-decoration: none;")
+              //- // Card Header - Dropdown
+              .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(v-on:dblclick="OpenCloseNote(item._id)")
+                a(v-bind:href="'/Note?id='+item._id+'&title='+item.title.replace(/ /g,'_')", style="text-decoration: none;")
                   h5.m-0.font-weight-bold.text-primary {{item.title}}
-                a.OpenCloseNote(v-bind:oc-id="item._id", href="#")
+                a.OpenCloseNote( v-on:click="OpenCloseNote(item._id)" ,href="#")
                   i.OpenCloseNoteIcon.fa.fa-arrows-alt.text-gray-400
-                
-                //- a(href="/Note?id=" + val.id)
-                //-   i.fas.fa-external-link-square-alt
 
-                //- .dropdown.no-arrow
-                //-   a#dropdownMenuLink.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                //-     i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
-                //-   .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in(aria-labelledby='dropdownMenuLink', x-placement='bottom-end', style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(17px, 18px, 0px);')
-                //-     .dropdown-header Dropdown Header:
-                //-     a.dropdown-item(href='#') Action
-                //-     a.dropdown-item(href='#') Another action
-                //-     .dropdown-divider
-                //-     a.dropdown-item(href='#') Something else here
-              // Card Body
-              .card-body.cardHeigth( style="")
+              //- // Card Body
+              .card-body.cardHeigth(v-bind:id="'oc-'+item._id", style="")
                   div(v-for="code in item.code")
                       h6 {{code.description}}
                       code-mirror.form-control(v-bind:body="code.mainbody",rows='8' ,v-bind:lang="code.porgrammingStylelanguge", :key="componentKey" , v-bind:id="code._id") 
-                      //- textarea#code.code.form-control(rows='8',v-bind:lang="code.porgrammingStylelanguge" ,name='body',style="margin: 10px;",value=""){{code.mainbody}} 
                       br
                 .card-footer.text-muted
                   a.deleteNote(style=("float: right;"), v-on:click="deleteNote(item._id,index)")
                     i.deleteNoteIcon.fa.fa-trash.text-gray-400
-                  span.tag(v-for="tag in item.tags"){{tag}} 
-               
-        
-          //- .col-md-12
-          //-       .mc-wrapper(id= val.id, style="")
-          //-         h3.note-title= val.title
-          //-           a.toolbar.OpenCloseNote(href="#")
-          //-            <i class="fas fa-arrows-alt"></i>
-          //-           a.toolbar(href="/Note?id=" + val.id)
-          //-            <i class="fas fa-external-link-square-alt"></i>
-          //-         .moreContent
-          //-           each bodyVal in val.body
-          //-             if bodyVal
-          //-               textarea#code.code.form-control(rows='8',name='body',style="margin: 10px;",value="")= bodyVal
-          //-               br
-          //-         each tagVal in val.tags
-          //-                 span.tag=  tagVal
-    //- div#page(style="margin:20px;")
+                  
+                  span.badge.badge-primary(v-if="item.projectName"){{item.projectName}}
+                  span.badge.badge-info(v-if="item.Technology"){{item.Technology}}
+                  //- span.badge.badge-dark(v-if="item.Type"){{item.Type}}
+

@@ -11,8 +11,8 @@ var NoteModelSchema = new mongoose.Schema({
   code: [CodeNoteModelSchema],
   userProfileId: String,
   projectName:String,
-  Type:[String] ,
-  Technology :[String]
+  Type:String ,
+  Technology :String
 });
 
 // Compile model from schema

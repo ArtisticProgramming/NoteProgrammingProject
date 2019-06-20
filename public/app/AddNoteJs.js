@@ -45,10 +45,11 @@ var app = new Vue({
             this.componentKey += 1;
           $("#technology").select2("val", "");
           $("#project").select2("val", "");
-          $("#noteType").select2("val", "");
+          $("#nType").select2("val", "");
+
         })
         .catch((error) => {
-
+            alert(error)
         })
 
     },
@@ -176,6 +177,7 @@ $(document).ready(function () {
     },
     multiple: true,
   }).select2('val', []).on("change", function (e) {
+
     var data = $(this).select2('data')[0];
     if (data !== undefined) {
       app.nodeModel.technologyType.text = data.text;
@@ -188,7 +190,7 @@ $(document).ready(function () {
 
 
 
-  $("#noteType").select2({
+  $("#nType").select2({
     // tags: [],
     // allowClear: true,
     initSelection: function (element, callback) {
@@ -223,13 +225,14 @@ $(document).ready(function () {
       }
     },
     //multiple: true,
-  }).select2('val', []).on("change", function (e) {
-    var data = $(this).select2('data')[0];
+  }).select2('val', '').on("change", function (e) {
+    var data = $(this).select2('data');
+    console.log(data)
+
     if (data !== undefined) {
       app.nodeModel.noteType.text = data.text;
       app.nodeModel.noteType.id = data.id;
     }
-
   });
 
 

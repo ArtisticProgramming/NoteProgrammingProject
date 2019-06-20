@@ -49,7 +49,9 @@ module.exports.PostAddNote =async function (req, res) {
     var note = new noteModel({
         title: req.body.model.title,
         userProfileId: req.session.profileId,
-        projectName: req.body.model.ProjectType,
+        projectName: req.body.model.projectType.text,
+        Type: req.body.model.noteType.text,
+        Technology: req.body.model.technologyType.text,
         // Technology:"req.body.Technology[0],"
         // Type:req.body.Type[0],
         code: codesModel
@@ -90,7 +92,7 @@ module.exports.GetNotes = async function (req, res) {
         title = req.param('title');
     }
     // $options:'i' ==> it is for  Case-insensitive 
-    noteModel.find({ title: { $regex: '.*' + title + '.*', $options: 'i' } })
+    noteModel.find({ title: { $regex: '.*' + title + '.*', $options: 'i' } , userProfileId:req.session.profileId})
         .skip(perPage * page).limit(perPage)
         .then((doc) => {
             res.send({ model: doc, count: count, perPage: perPage, currentPage: page });
