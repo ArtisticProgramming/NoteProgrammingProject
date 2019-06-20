@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www  ",
+    "_start": "npm-run-all --parallel watch:build watch:server ",
+    "watch:build": "webpack ",
     "watch:server-old": "nodemon ./bin/www \"./dist/main.js\" --watch \"./dist\"",
     "watch:server": "nodemon ./bin/www ",
+    "build": "webpack",
     "start2": "node ./bin/www",
     "debug": "nodemon --inspect ./bin/www"
   },
