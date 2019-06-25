@@ -49,7 +49,7 @@ block content
                   //-         option(value='2') Fixing Bug
                   //-         option(value='3') Learning      
                   //-         option(value='4') Document   
-                  .form-group-4.col-md-4
+                  .form-group-4.col-md-2
                         <span>Project: </span>
                         input#project.form-control
                   .form-group-4.col-md-4
@@ -58,6 +58,10 @@ block content
                   .form-group-4.col-md-4
                         <span>Note Type:</span>
                         input#nType.form-control
+                   .form-group-4.col-md-2
+                        div(for='exampleInputEmail1' ) Book Mark:
+                        input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox',v-model="nodeModel.bookMark")
+                        label.checkbox-custom-label(for='checkbox-3')
                 br
                 .row(v-for="(item, index) in nodeModel.model")
                   .form-group.col-md-10
@@ -93,7 +97,7 @@ block content
                   .col-md-5
                       
               button.btn.btn-primary.btn-user(type='button', v-on:click="submit()") Submit
-    
+        
   
 
   

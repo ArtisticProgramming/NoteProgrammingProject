@@ -37,17 +37,26 @@ block content
   
   //--------------------------------------------------------------------------
   div#app
+   #deleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+            .modal-dialog(role='document')
+                        .modal-content
+                          .modal-header
+                            h5#exampleModalLabel.modal-title Delete Note
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                              span(aria-hidden='true') ×
+                          .modal-body Do you want to delete this Note?
+                          .modal-footer
+                            button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+                            a.btn.btn-primary(href='#'  ,v-on:click="deleteNote(deleteModalNote.id,deleteModalNote.index)"  ) Ok
     #banner.page-header
 
       .form-row   
-        div
-          input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox')
-          label.checkbox-custom-label(for='checkbox-3')
-
         .col-md-4.mb-3
-          input#validationCustom01.form-control(type='text',v-model="searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
+          input#validationCustom01.form-control(type='text',v-model="searchModel.searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
           .valid-feedback
-            | Looks good!
+        .col-md-0.5.mb-0.5  
+         input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox',v-model="searchModel.bookMark")
+         label.checkbox-custom-label(for='checkbox-3')
         button.btn.btn-primary.mb-3(type='button',v-on:click="search()")
                  i.fas.fa-search.fa-sm
       .row
@@ -69,10 +78,13 @@ block content
                       code-mirror.form-control(v-bind:body="code.mainbody",rows='8' ,v-bind:lang="code.porgrammingStylelanguge", :key="componentKey" , v-bind:id="code._id") 
                       br
                 .card-footer.text-muted
-                  a.deleteNote(style=("float: right;"), v-on:click="deleteNote(item._id,index)")
+                  //a.deleteNote(style=("float: right;"), v-on:click="deleteNote(item._id,index)")
                     i.deleteNoteIcon.fa.fa-trash.text-gray-400
+                  a.deleteNote( v-on:click="openDeleteModal(item._id,index)" , style=("float: right;"))
+                    i.deleteNoteIcon.fa.fa-trash.text-gray-400                   
                   
                   span.badge.badge-primary(v-if="item.projectName"){{item.projectName}}
                   span.badge.badge-info(v-if="item.Technology"){{item.Technology}}
                   //- span.badge.badge-dark(v-if="item.Type"){{item.Type}}
 
+       

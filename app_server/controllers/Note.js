@@ -12,29 +12,18 @@ module.exports.AddNote = function (req, res) {
     res.render("AddNote", { title: "Add Note " });
 };
 
-module.exports.PostAddNote =async function (req, res) {
-    // a document instance
-    console.log("--------------------------------")
-
-    console.log(req.body)
-    console.log(req.body.model)
-    console.log("Tags:")
-    console.log(req.body.tags)
+module.exports.PostAddNote = async function (req, res) {
     let codes = req.body.model.model;
     let length = codes.length;
-
     if (req.body.model.projectType.id == '$*NewTag*$') {
-         AddBasicData(req.body.model.projectType.text , 1 , req.session.profileId );
+        AddBasicData(req.body.model.projectType.text, 1, req.session.profileId);
     }
-
     if (req.body.model.technologyType.id == '$*NewTag*$') {
-         AddBasicData(req.body.model.technologyType.text , 2 ,req.session.profileId);
+        AddBasicData(req.body.model.technologyType.text, 2, req.session.profileId);
     }
-
     if (req.body.model.noteType.id == '$*NewTag*$') {
-         AddBasicData(req.body.model.noteType.text , 3 ,req.session.profileId );
+        AddBasicData(req.body.model.noteType.text, 3, req.session.profileId);
     }
-
     var codesModel = [];
     for (i = 0; i < length; i++) {
         debugger;
@@ -45,33 +34,23 @@ module.exports.PostAddNote =async function (req, res) {
         }
         codesModel.push(model);
     }
-
     var note = new noteModel({
         title: req.body.model.title,
         userProfileId: req.session.profileId,
         projectName: req.body.model.projectType.text,
         Type: req.body.model.noteType.text,
         Technology: req.body.model.technologyType.text,
-        // Technology:"req.body.Technology[0],"
-        // Type:req.body.Type[0],
+        bookMark: req.body.model.bookMark,
         code: codesModel
     });
-
-
-
-
-
-    // save model to database
     note.save(function (err, note) {
         if (err) return console.error(err);
         console.log(note)
         console.log(note.name + " saved to note collection.");
         res.send({ result: "success" })
     });
-
-
-    // res.render("AddNote", { title: "Add Note" });
 };
+
 // -----------------------------------------------------------------------------
 module.exports.Notes = async function (req, res) {
     console.log("profileId => ")
@@ -87,12 +66,32 @@ module.exports.GetNotes = async function (req, res) {
     var count = await noteModel.count()
     page = Math.max(0, page - 1)
 
+    var query = {
+        userProfileId: req.session.profileId
+    }
+
     title = ""
     if (req.param('title') !== undefined) {
+
         title = req.param('title');
+    console.log(title)
+
+        query.title = { $regex: '.*' + title + '.*', $options: 'i' }
+    console.log(query)
+         
     }
+
+    bookMark = undefined
+    if (req.param('bookMark') !== undefined) {
+        bookMark = req.param('bookMark');
+        query.bookMark = true;
+    }
+
+    bookMark
     // $options:'i' ==> it is for  Case-insensitive 
-    noteModel.find({ title: { $regex: '.*' + title + '.*', $options: 'i' } , userProfileId:req.session.profileId})
+    console.log("--------------query-------------------")
+    console.log(query)
+    noteModel.find(query)
         .skip(perPage * page).limit(perPage)
         .then((doc) => {
             res.send({ model: doc, count: count, perPage: perPage, currentPage: page });
@@ -174,12 +173,11 @@ module.exports.NoteList = function (req, res) {
 }
 
 
-AddBasicData = function(text,type,profileId)
-{
+AddBasicData = function (text, type, profileId) {
     var basicData = new BasicDataModel({
         title: text,
         userProfileId: profileId,
-        type:type
+        type: type
     });
 
     basicData.save(function (err, data) {

@@ -8,9 +8,18 @@ var app = new Vue({
   el: '#app',
   data: {
     message: 'Hello Vue!',
-    searchTextBox: "",
+    searchModel: {
+      searchTextBox: "",
+      bookMark: false
+    },
     boxmodel: [],
-    componentKey: 0
+    deleteModalNote: {
+      id: 0,
+      index: 0,
+      text: ""
+    },
+    componentKey: 0,
+
   },
   components: {
     codeMirrorComponent
@@ -26,11 +35,18 @@ var app = new Vue({
     loadNote(page, reset) {
       var perPage = 8;
       let title = "";
-      console.log(this.searchTextBox)
-      if (this.searchTextBox !== undefined && this.searchTextBox != "")
-        title = "&title=" + this.searchTextBox;
-      // axios.get('/GetNotes?page=' + page + "&perPage=" + perPage + title)
-      noteJsModel.getNotes(page, perPage, title)
+      let bookMark = "";
+
+      console.log(this.searchModel.searchTextBox)
+      
+      if (this.searchModel.searchTextBox !== undefined && this.searchModel.searchTextBox != "")
+        title = "&title=" + this.searchModel.searchTextBox;
+
+      if (this.searchModel.bookMark !== undefined && this.searchModel.bookMark != false)
+        bookMark = "&bookMark=" + this.searchModel.bookMark;
+
+
+      noteJsModel.getNotes(page, perPage, title, bookMark)
         .then(response => {
           if (reset) {
             this.boxmodel = [];
@@ -52,43 +68,53 @@ var app = new Vue({
         )
 
     },
-    OpenCloseNote(id){
-      var heigth="100px";
+    OpenCloseNote(id) {
+      var heigth = "100px";
       debugger;
-      $( "#oc-"+id )
+      $("#oc-" + id)
       console.log($(this).parent().parent().children(".cardHeigth"))
-      var selctor =$( "#oc-"+id );
+      var selctor = $("#oc-" + id);
       var sele = $(selctor).parent().parent()
       var h = $(selctor).css("height");
       if (h == heigth) {
-          $(selctor).css('height', 'auto');
-          $(selctor).css('overflow-y', 'hidden');
-          $(sele).removeClass("col-lg-6")
-          $(sele).addClass("col-lg-12")
+        $(selctor).css('height', 'auto');
+        $(selctor).css('overflow-y', 'hidden');
+        $(sele).removeClass("col-lg-6")
+        $(sele).addClass("col-lg-12")
       } else {
-          $(selctor).css('height', heigth);
-          $(selctor).css('overflow-y', 'scroll');
-          $(sele).removeClass("col-lg-12")
-          $(sele).addClass("col-lg-6") 
-          // $(selctor).animate({height:"100px"}, 400, function() {
-          //     // Animation complete.
-          //   });
+        $(selctor).css('height', heigth);
+        $(selctor).css('overflow-y', 'scroll');
+        $(sele).removeClass("col-lg-12")
+        $(sele).addClass("col-lg-6")
+        // $(selctor).animate({height:"100px"}, 400, function() {
+        //     // Animation complete.
+        //   });
       }
       return false;
     },
+    openDeleteModal(id, index) {
+      console.log(id)
+      this.deleteModalNote.id = id;
+      this.deleteModalNote.index = index;
+      index
+      this.$nextTick(function () {
+        $('#deleteModal').modal('toggle');
+      })
+    },
     deleteNote(id, index) {
-      if (confirm("Wanna Delete?")) {
-        noteJsModel.deleteNote(id)
-          .then(response => {
-            debugger;
-            this.$delete(this.boxmodel, index)
-            this.$nextTick(function () {
-              //Update Components and everyThing
-              this.componentKey += 1;
-            })
-          }
-          )
-      }
+      // if (confirm("Wanna Delete?")) {
+      noteJsModel.deleteNote(id)
+        .then(response => {
+          debugger;
+          this.$delete(this.boxmodel, index)
+          this.$nextTick(function () {
+            $('#deleteModal').modal('hide');
+            //Update Components and everyThing
+            this.componentKey += 1;
+          })
+        }
+        )
+      // }
     }
   },
   mounted() {

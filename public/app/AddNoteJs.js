@@ -9,6 +9,7 @@ var app = new Vue({
   data: {
     message: 'Create a Note',
     nodeModel: {
+      bookMark: false,
       title: "",
       projectType: {},
       technologyType: {},
@@ -35,21 +36,28 @@ var app = new Vue({
       // var nodeModel = console.log(this.nodeModel.model);
       axios.post('/PostAddNote', { model: this.nodeModel })
         .then((response) => {
-          this.nodeModel={};
-          this.nodeModel.model= [
-            {
-              mainbody: "",
-              desc: "",
-              lang: "htmlmixed"
-            }]
-            this.componentKey += 1;
+          this.nodeModel = {
+            bookMark: false,
+            title: "",
+            projectType: {},
+            technologyType: {},
+            noteType: {},
+            model: [
+              {
+                mainbody: "",
+                desc: "",
+                lang: "htmlmixed"
+              }],
+            componentKey: 1,
+          }
+          this.componentKey += 1;
           $("#technology").select2("val", "");
           $("#project").select2("val", "");
           $("#nType").select2("val", "");
 
         })
         .catch((error) => {
-            alert(error)
+          alert(error)
         })
 
     },
@@ -131,6 +139,7 @@ $(document).ready(function () {
   }).select2('val', []).on("change", function (e) {
     app.projectType = "";
     var data = $(this).select2('data')[0];
+    console.log(data)
     if (data !== undefined) {
       app.nodeModel.projectType.text = data.text;
       app.nodeModel.projectType.id = data.id;

@@ -12,7 +12,8 @@ var NoteModelSchema = new mongoose.Schema({
   userProfileId: String,
   projectName:String,
   Type:String ,
-  Technology :String
+  Technology :String,
+  bookMark : Boolean,
 });
 
 // Compile model from schema
