@@ -13,7 +13,10 @@ var NoteModelSchema = new mongoose.Schema({
   projectName:String,
   Type:String ,
   Technology :String,
+  SpecificSubject:String,
   bookMark : Boolean,
+  updated: { type: Date, default: Date.now() },
+  created: Date
 });
 
 // Compile model from schema

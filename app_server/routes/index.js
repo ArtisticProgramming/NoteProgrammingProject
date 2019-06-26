@@ -54,6 +54,7 @@ router.get('/NoteList', IsAuthenticated, ctrlNote.NoteList);
 //Basic Data
 router.get('/GetProjectTypes', IsAuthenticated, ctrlBasicData.GetProjectTypes);
 router.get('/GetTechnologies', IsAuthenticated, ctrlBasicData.GetTechnologies);
+router.get('/GetSpecificSubject', IsAuthenticated, ctrlBasicData.GetSpecificSubject);
 router.get('/GetNoteTypes', IsAuthenticated, ctrlBasicData.GetNoteTypes);
 
 // router.post('/AddProjectType', IsAuthenticated, ctrlBasicData.AddProjectType);

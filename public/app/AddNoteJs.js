@@ -13,6 +13,7 @@ var app = new Vue({
       title: "",
       projectType: {},
       technologyType: {},
+      specificSubject: {},
       noteType: {},
       model: [
         {
@@ -41,6 +42,7 @@ var app = new Vue({
             title: "",
             projectType: {},
             technologyType: {},
+            specificSubject: {},
             noteType: {},
             model: [
               {
@@ -54,6 +56,7 @@ var app = new Vue({
           $("#technology").select2("val", "");
           $("#project").select2("val", "");
           $("#nType").select2("val", "");
+          $("#specificSubject").select2("val", "");
 
         })
         .catch((error) => {
@@ -243,8 +246,51 @@ $(document).ready(function () {
       app.nodeModel.noteType.id = data.id;
     }
   });
+// --------------------------------------------------------------------------------
+$("#specificSubject").select2({
+  tags: [],
+  // allowClear: true,
+  initSelection: function (element, callback) {
+    // var data = { id: 1, text: 'initSelection test' };
+    // callback(data);
+    // app.projectType = data;
+  },
+  // multiple: true,
+  maximumInputLength: 30,
+  maximumSelectionSize: 1,
+  ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+    url: "/GetSpecificSubject",
+    dataType: 'json',
+    quietMillis: 100,
+    data: function (term, page) {
+      return {
+        query: term, // search term
+      };
+    },
+    results: function (data, page) { // parse the results into the format expected by Select2.
+      // since we are using custom formatting functions we do not need to alter the remote JSON data
+      return { results: data.model };
+    },
+    // cache: true
+  },
+  createSearchChoice: function (term, data) {
+    if ($(data).filter(function () {
+      return this.text.localeCompare(term) === 0;
+    }).length === 0) {
+      return { id: "$*NewTag*$", text: term };
+    }
+  },
+  multiple: true,
+}).select2('val', []).on("change", function (e) {
 
+  var data = $(this).select2('data')[0];
+  if (data !== undefined) {
+    app.nodeModel.specificSubject.text = data.text;
+    app.nodeModel.specificSubject.id = data.id;
+  }
 
+});
+// --------------------------------------------------------------------
 
 
   // $("#").select2({

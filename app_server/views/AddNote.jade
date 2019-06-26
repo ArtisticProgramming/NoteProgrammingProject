@@ -11,55 +11,23 @@ block content
                 .form-group
                   label(for='exampleInputEmail1' ) Title
                   input.form-control(type='text', aria-describedby='', v-model="nodeModel.title", placeholder='Title', name='title')
-
-                //- .form-group
-                //-   label(for='') Select 
-                //-   input#e12(name="tags" multiple="multiple",type="hidden")
-
-                //- select#w2.form-control(multiple='', data-select2-id='10', tabindex='-1', aria-hidden='true')
-                //-   option(data-select2-id='14') red
-                //-   option(data-select2-id='15') blue
-                //-   option(data-select2-id='16') green
-                //-   option(value='rerewr', data-select2-id='57', data-select2-tag='true') rerewr
-                //- select#tags(multiple='multiple')
-                //-     option(selected='selected') Kerry
-                //-     option(selected='selected') Cork
                 .row
-                  //- .form-group.col-md-3
-                  //-     <span>Hello</span>
-
-                  //-     //- label(for='') Project Type 
-                  //-     selectize#type.form-control(type="text",
-                  //-      multiple="multiple",url="/GetProjectTypes", @input-data="updateProjectType")
-                  //-         //- option(value='1') General
-                  //-         //- option(value='2') BCMLOGIC
-                  //-         //- option(value='3') Note
-                  //- .form-group-4.col-md-3
-                  //-     <span>Hello</span>
-
-                  //-     //- label(for='') Technology, Libery, Framework 
-                  //-     selectize#type.form-control(type="text", multiple="multiple", @input-data="updateTechnology")
-                  //-         option(value='1') SQL
-                  //-         option(value='2') ASP.Net
-                  //-         option(value='3') NodeJS
-                  //- .form-group-4.col-md-3
-                  //-     <span>Hello</span>
-                  //-     selectize#type.form-control(type="text", multiple="multiple", @input-data="updateType")
-                  //-         option(value='1') Pattern
-                  //-         option(value='2') Fixing Bug
-                  //-         option(value='3') Learning      
-                  //-         option(value='4') Document   
-                  .form-group-4.col-md-2
-                        <span>Project: </span>
-                        input#project.form-control
-                  .form-group-4.col-md-4
-                        <span>Technology, Libery, Framework:</span>
+                
+                  .form-group-4.col-md-3
+                        <span>General Subject (Scienc, Technology...)</span>
                         input#technology.form-control
-                  .form-group-4.col-md-4
-                        <span>Note Type:</span>
-                        input#nType.form-control
+                  .form-group-4.col-md-3
+                        <span>Specific subject (Component, library...)</span>
+                        input#specificSubject.form-control
                    .form-group-4.col-md-2
-                        div(for='exampleInputEmail1' ) Book Mark:
+                        <span>Project </span>
+                        input#project.form-control  
+                  .form-group-4.col-md-2
+                        <span>Note Type</span>
+                        input#nType.form-control    
+                  
+                   .form-group-4.col-md-2
+                        div(for='exampleInputEmail1' ) Book Mark
                         input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox',v-model="nodeModel.bookMark")
                         label.checkbox-custom-label(for='checkbox-3')
                 br

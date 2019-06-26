@@ -21,9 +21,10 @@ module.exports.PostAddNote = async function (req, res) {
     if (req.body.model.technologyType.id == '$*NewTag*$') {
         AddBasicData(req.body.model.technologyType.text, 2, req.session.profileId);
     }
-    if (req.body.model.noteType.id == '$*NewTag*$') {
-        AddBasicData(req.body.model.noteType.text, 3, req.session.profileId);
+    if (req.body.model.specificSubject.id == '$*NewTag*$') {
+        AddBasicData(req.body.model.specificSubject.text, 3, req.session.profileId);
     }
+
     var codesModel = [];
     for (i = 0; i < length; i++) {
         debugger;
@@ -40,7 +41,9 @@ module.exports.PostAddNote = async function (req, res) {
         projectName: req.body.model.projectType.text,
         Type: req.body.model.noteType.text,
         Technology: req.body.model.technologyType.text,
+        SpecificSubject: req.body.model.specificSubject.text,
         bookMark: req.body.model.bookMark,
+        created:Date.now(),
         code: codesModel
     });
     note.save(function (err, note) {
@@ -91,7 +94,7 @@ module.exports.GetNotes = async function (req, res) {
     // $options:'i' ==> it is for  Case-insensitive 
     console.log("--------------query-------------------")
     console.log(query)
-    noteModel.find(query)
+    noteModel.find(query).sort({created: -1})
         .skip(perPage * page).limit(perPage)
         .then((doc) => {
             res.send({ model: doc, count: count, perPage: perPage, currentPage: page });

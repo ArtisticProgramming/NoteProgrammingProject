@@ -85,16 +85,15 @@ module.exports.GetTechnologies = function (req, res) {
         });
 
 };
-
-
-module.exports.GetNoteTypes= function (req, res) {
+// --------------------------------------------Specific_Subject------------------------------------
+module.exports.GetSpecificSubject = function (req, res) {
     query = ""
   if (req.param('query') !== undefined) {
       query = req.param('query');
   }
   
   BasicDataModel.find({title: { $regex: '.*' + query + '.*' ,$options:'i'},
-                         type:3})
+                         userProfileId:req.session.profileId, type:3})
       .then((doc) => {
           var model = ConvertBasicDataToDTO(doc);
           res.send({ model: model});
@@ -104,6 +103,29 @@ module.exports.GetNoteTypes= function (req, res) {
       });
 
 };
+
+// --------------------------------------------Note_Types------------------------------------
+
+module.exports.GetNoteTypes= function (req, res) {
+    query = ""
+  if (req.param('query') !== undefined) {
+      query = req.param('query');
+  }
+  
+  BasicDataModel.find({title: { $regex: '.*' + query + '.*' ,$options:'i'},
+                         type:4})
+      .then((doc) => {
+          var model = ConvertBasicDataToDTO(doc);
+          res.send({ model: model});
+      })
+      .catch((err) => {
+          console.log(err);
+      });
+
+};
+
+
+
 
 
 
