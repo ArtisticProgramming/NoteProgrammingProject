@@ -34,7 +34,15 @@ block content
     .card-footer span{
       margin-right:5px;
     }
-  
+
+    .noteMainTitle{
+      color:#626262!important;
+
+    }
+    .noteMainTitle:hover{
+      color:#4e73df!important
+      
+    }
   //--------------------------------------------------------------------------
   div#app
    #deleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
@@ -67,7 +75,7 @@ block content
               //- // Card Header - Dropdown
               .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(v-on:dblclick="OpenCloseNote(item._id)")
                 a(v-bind:href="'/Note?id='+item._id+'&title='+item.title.replace(/ /g,'_')", style="text-decoration: none;")
-                  h5.m-0.font-weight-bold.text-primary {{item.title}}
+                  h5.m-0.font-weight-bold.text-primary.noteMainTitle {{item.title}}
                 a.OpenCloseNote( v-on:click="OpenCloseNote(item._id)" ,href="#")
                   i.OpenCloseNoteIcon.fa.fa-arrows-alt.text-gray-400
 
@@ -88,4 +96,3 @@ block content
                   span.badge.badge-info(v-if="item.Technology"){{item.SpecificSubject}}
                   //- span.badge.badge-dark(v-if="item.Type"){{item.Type}}
 
-       

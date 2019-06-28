@@ -67,11 +67,12 @@ router.get('/', (req, res) => {
         res.cookie('token', req.session.token);
         res.cookie('profileId', req.session.profileId );
         res.render("locations-list", { title: "Note", model: req.session.token });
+        
 
     } else {
         res.cookie('token', '')
         res.cookie('profileId', '');
-        res.render("locations-list", { title: "Note", model: req.session.token });
+       res.render("locations-list", { title: "Note", model: req.session.token });
     }
 });
 

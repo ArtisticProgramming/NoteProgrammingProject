@@ -30,9 +30,6 @@ module.exports.Rdirect = async function (req, res) {
             console.log(note.name + " saved to note collection.");
         });
     }
-
-
-
     res.redirect('/Notes');
 }
 
