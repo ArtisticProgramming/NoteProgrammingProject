@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 var debug = require('debug')('Express4');
 var app = require('../app');
+var http = require("http");
 
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
+    setInterval(function() {
+  console.log("---------------CALL Hherokuapp every 30 second, it is for waking up Hherokuapp------------------")
+        http.get("http://infinite-thicket-40695.herokuapp.com");
+    }, 900000); // every 15 minutes (900000)
   debug('Express server listening on port ' + server.address().port);
 });
