@@ -16,7 +16,10 @@ module.exports = {
       relativePath + '/app/test.js',
       relativePath + '/app/model/noteJsModel.js',
       relativePath + '/app/components/codeMirrorComponent.js',
-      relativePath + '/app/components/selectize.js',
+      // relativePath + '/app/components/selectize.js',
+      relativePath + '/app/components/select2.js',
+      relativePath + '/app/common/utilityJs.js',
+      relativePath + '/app/common/dropdownsJs.js'
     ]
   },
   output: {

@@ -1,7 +1,6 @@
 extends layoutAdmin
             
 block content
-
     .row#anapp
       .col-md-12.col-sm-12
         .card.mb-4
@@ -12,7 +11,6 @@ block content
                   label(for='exampleInputEmail1' ) Title
                   input.form-control(type='text', aria-describedby='', v-model="nodeModel.title", placeholder='Title', name='title')
                 .row
-                
                   .form-group-4.col-md-3
                         <span>General Subject (Scienc, Technology...)</span>
                         input#technology.form-control
@@ -24,8 +22,8 @@ block content
                         input#project.form-control  
                   .form-group-4.col-md-2
                         <span>Note Type</span>
-                        input#nType.form-control    
-                  
+                        select2.form-control(url="/GetNoteTypes",  @input-data="getSelectValue" , v-model="selected")
+                        //- input#nType.form-control()
                    .form-group-4.col-md-2
                         div(for='exampleInputEmail1' ) Book Mark
                         input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox',v-model="nodeModel.bookMark")
@@ -65,7 +63,9 @@ block content
                   .col-md-5
                       
               button.btn.btn-primary.btn-user(type='button', v-on:click="submit()") Submit
-        
-  
-
-  
+     script.
+      $(document).ready(function(){
+        console.log("EnableAddNode")
+        window.EnableAddNode();
+      })
+      

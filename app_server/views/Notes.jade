@@ -60,8 +60,11 @@ block content
 
       .form-row   
         .col-md-4.mb-3
-          input#validationCustom01.form-control(type='text',v-model="searchModel.searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
+          input#searchTxt.form-control(type='text',v-model="searchModel.searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
           .valid-feedback
+        .col-md-2.mb-3
+           select2.form-control(url="/GetNoteTypes",  @input-data="getNoteTypeSelectValue" , v-model="selected")
+          .valid-feedback          
         .col-md-0.5.mb-0.5  
          input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox',v-model="searchModel.bookMark")
          label.checkbox-custom-label(for='checkbox-3')
@@ -73,10 +76,10 @@ block content
             //- // Dropdown Card Example
             .card.shadow.mb-4
               //- // Card Header - Dropdown
-              .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(v-on:dblclick="OpenCloseNote(item._id)")
+              .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(v-on:click.self="OpenCloseNote(item._id)")
                 a(v-bind:href="'/Note?id='+item._id+'&title='+item.title.replace(/ /g,'_')", style="text-decoration: none;")
                   h5.m-0.font-weight-bold.text-primary.noteMainTitle {{item.title}}
-                a.OpenCloseNote( v-on:click="OpenCloseNote(item._id)" ,href="#")
+                a.OpenCloseNote( v-on:click.self="OpenCloseNote(item._id)" ,href="#")
                   i.OpenCloseNoteIcon.fa.fa-arrows-alt.text-gray-400
 
               //- // Card Body
@@ -95,4 +98,9 @@ block content
                   span.badge.badge-success(v-if="item.Technology"){{item.Technology}}
                   span.badge.badge-info(v-if="item.Technology"){{item.SpecificSubject}}
                   //- span.badge.badge-dark(v-if="item.Type"){{item.Type}}
-
+    script.
+      $(document).ready(function(){
+        console.log("EnableVusJs")
+        window.EnableVusJs();
+      })
+      

@@ -43,7 +43,7 @@ module.exports.PostAddNote = async function (req, res) {
         Technology: req.body.model.technologyType.text,
         SpecificSubject: req.body.model.specificSubject.text,
         bookMark: req.body.model.bookMark,
-        created:Date.now(),
+        created: Date.now(),
         code: codesModel
     });
     note.save(function (err, note) {
@@ -77,24 +77,46 @@ module.exports.GetNotes = async function (req, res) {
     if (req.param('title') !== undefined) {
 
         title = req.param('title');
-    console.log(title)
+        console.log(title)
 
         query.title = { $regex: '.*' + title + '.*', $options: 'i' }
-    console.log(query)
-         
+        console.log(query)
     }
 
-    bookMark = undefined
+    bookMark = ""
     if (req.param('bookMark') !== undefined) {
         bookMark = req.param('bookMark');
         query.bookMark = true;
     }
 
-    bookMark
+    noteType = ""
+    if (req.param('noteType') !== undefined) {
+        noteType = req.param('noteType');
+        query.Type = noteType;
+    }
+
+    projectName = ""
+    if (req.param('projectName') !== undefined) {
+        projectName = req.param('projectName');
+        query.projectName = projectName;
+    }
+
+    technology = ""
+    if (req.param('technology') !== undefined) {
+        technology = req.param('technology');
+        query.Technology = technology;
+    }
+
+    specificSubject = ""
+    if (req.param('specificSubject') !== undefined) {
+        specificSubject = req.param('specificSubject');
+        query.SpecificSubject = specificSubject;
+    }
+
     // $options:'i' ==> it is for  Case-insensitive 
     console.log("--------------query-------------------")
     console.log(query)
-    noteModel.find(query).sort({created: -1})
+    noteModel.find(query).sort({ created: -1 })
         .skip(perPage * page).limit(perPage)
         .then((doc) => {
             res.send({ model: doc, count: count, perPage: perPage, currentPage: page });

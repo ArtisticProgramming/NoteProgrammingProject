@@ -11,7 +11,7 @@ export const codeMirrorComponent =Vue.component('code-mirror', {
   },
   mounted: function () {
     var vm= this;
-    console.log(this.lang)
+    // console.log(this.lang)
     var element = $(this.$el)
     var code = CodeMirror.fromTextArea(element[0], {
       mode: this.lang,
@@ -26,7 +26,7 @@ export const codeMirrorComponent =Vue.component('code-mirror', {
 
   },
   beforeDestroy: function () {
-    console.log(cm)
+    // console.log(cm)
     let i=0;
     for (i = 0; i < $('.CodeMirror').length; i++) {
       var cm = $('.CodeMirror')[i];
