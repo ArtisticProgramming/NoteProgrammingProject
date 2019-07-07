@@ -13,16 +13,32 @@ block content
                 .row
                   .form-group-4.col-md-3
                         <span>General Subject (Scienc, Technology...)</span>
-                        input#technology.form-control
+                        select2.form-control( 
+                         multi="true",
+                         url="/GetTechnologies", 
+                         @input-data="getGeneralSubjectSelectValue" ,
+                         v-model="selectedGeneralSubject")
                   .form-group-4.col-md-3
                         <span>Specific subject (Component, library...)</span>
-                        input#specificSubject.form-control
+                        select2.form-control( 
+                         multi="true",
+                         url="/GetSpecificSubject", 
+                         @input-data="getSpecificSubjectSelectValue" ,
+                         v-model="selectedSpecificSubject")
                    .form-group-4.col-md-2
                         <span>Project </span>
-                        input#project.form-control  
+                        select2.form-control( 
+                         multi="true",
+                         url="/GetProjectTypes", 
+                         @input-data="getProjectSelectValue" ,
+                         v-model="selectedProject")
+
+                        //- input#project.form-control  
                   .form-group-4.col-md-2
                         <span>Note Type</span>
-                        select2.form-control(url="/GetNoteTypes",  @input-data="getSelectValue" , v-model="selected")
+                        select2.form-control(multi="false" ,
+                         url="/GetNoteTypes",  
+                         @input-data="getNoteTypeSelectValue" , v-model="selectedNoteType")
                         //- input#nType.form-control()
                    .form-group-4.col-md-2
                         div(for='exampleInputEmail1' ) Book Mark
@@ -33,7 +49,7 @@ block content
                   .form-group.col-md-10
                     input#exampleInputEmail1.form-control(type='text', v-model="item.desc"
                     name="code[0][desc]", aria-describedby='emailHelp', placeholder='Title')
-                     
+                   
                   .form-group.col-md-2.selectlang
                     select.form-control.form-control(name="code[0][codelang]",v-model="item.lang")
                       option(value="htmlmixed") Html

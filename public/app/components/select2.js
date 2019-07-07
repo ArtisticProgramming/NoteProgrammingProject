@@ -1,78 +1,86 @@
 export const select2 = Vue.component('select2', {
-    props: ['options', 'value','url'],
-    data() {
-        return {
-            selectValue: '1234',
-        };
-    },
-    template: `<input /> `,
- 
-    mounted: function () {
-        var vm = this
-         select2=  $(this.$el).select2({
-            // tags: [],
-            // allowClear: true,
-            initSelection: function (element, callback) {
-              // var data = { id: 1, text: 'initSelection test' };
-              // callback(data);
-              // app.projectType = data;
-              // console.log(app.projectType)
-            },
-            // multiple: true,
-            //maximumInputLength: 30,
-            // maximumSelectionSize: 1,
-            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
-              url:vm.url,
-              dataType: 'json',
-              quietMillis: 100,
-              data: function (term, page) {
-                return {
-                  query: term, // search term
-                };
-              },
-              results: function (data, page) { // parse the results into the format expected by Select2.
-                // since we are using custom formatting functions we do not need to alter the remote JSON data
-                return { results: data.model };
-              },
-              // cache: true
-            },
-            createSearchChoice: function (term, data) {
-                console.log()
-              if ($(data).filter(function () {
-                return this.text.localeCompare(term) === 0;
-              }).length === 0) {
-                return { id: "$*NewTag*$", text: term };
-              }
-            },
-            //multiple: true,
-          }).select2('val', '').on("change", function (e) {
-            var data = $(this).select2('data');
-            console.log(data)
-            // alert("enableNoteType");
-        
-            if (data !== undefined) {
-               vm.$emit("input-data", data);
-            //   app.nodeModel.noteType.text = data.text;
-            //   app.nodeModel.noteType.id = data.id;
-            }
-          })
-    },
-    watch: {
-        value: function (value) {
-            console.log(value)
-     
-            // alert(value)
-            if(value ==""){
-                $(this.$el).select2("val", "");
-            }
+  props: ['options', 'value', 'url', 'multi'],
+  data() {
+    return {
+      selectValue: '1234',
+    };
+  },
+  
+  template: `<input /> `,
+
+  mounted: function () {
+
+    var vm = this
+    select2 = $(this.$el).select2({
+       tags: vm.multi==="true" ? []:  undefined,
+       maximumInputLength: 30,
+       maximumSelectionSize: 1,
+      // allowClear: true,
+      initSelection: function (element, callback) {
+        // var data = { id: 1, text: 'initSelection test' };
+        // callback(data);
+        // app.projectType = data;
+        // console.log(app.projectType)
+      },
+      // multiple: true,
+      //maximumInputLength: 30,
+      // maximumSelectionSize: 1,
+      ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+        url: vm.url,
+        dataType: 'json',
+        quietMillis: 100,
+        data: function (term, page) {
+          return {
+            query: term, // search term
+          };
         },
-        options: function (options) {
-            console.log(options)
+        results: function (data, page) { // parse the results into the format expected by Select2.
+          // since we are using custom formatting functions we do not need to alter the remote JSON data
+          return { results: data.model };
+        },
+        // cache: true
+      },
+      createSearchChoice: function (term, data) {
+        console.log()
+        if ($(data).filter(function () {
+          return this.text.localeCompare(term) === 0;
+        }).length === 0) {
+          return { id: "$*NewTag*$", text: term };
         }
+      },
+      //multiple: true,
+    }).select2('val',  vm.multi==="true" ? []:  '').on("change", function (e) {
+      var data = $(this).select2('data');
+      if (vm.multi==="true")
+      {
+        data = $(this).select2('data')[0];
+      }
+
+      if (data !== undefined) {
+        vm.$emit("input-data", data);
+        //   app.nodeModel.noteType.text = data.text;
+        //   app.nodeModel.noteType.id = data.id;
+      }
+    })
+
+  
+
+  
+  },
+  watch: {
+    value: function (value) {
+      console.log(value)
+      if (value == "") {
+        $(this.$el).select2("val", "");
+      }
     },
-    destroyed: function () {
-            $(this.$el).off().select2('destroy')
+    options: function (options) {
+      console.log(options)
     }
+  },
+  destroyed: function () {
+    $(this.$el).off().select2('destroy')
+  }
 })
 
 

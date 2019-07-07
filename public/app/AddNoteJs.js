@@ -9,7 +9,10 @@ window.EnableAddNode = function () {
     el: '#anapp',
     // template: '#demo-template',
     data: {
-      selected: "kkk",
+      selectedProject: "",
+      selectedSpecificSubject: "",
+      selectedGeneralSubject: "",
+      selectedNoteType: "",
       message: 'Create a Note',
       nodeModel: {
         bookMark: false,
@@ -56,25 +59,42 @@ window.EnableAddNode = function () {
               componentKey: 1,
             }
             this.componentKey += 1;
-            $("#technology").select2("val", "");
-            $("#project").select2("val", "");
-            this.selected = "";
-
-            // $("#nType").select2("val", "");
-            $("#specificSubject").select2("val", "");
-
+            this.selectedProject= "";
+            this.selectedNoteType= "";
+            this.selectedSpecificSubject= "";
+            this.selectedGeneralSubject= "";
           })
           .catch((error) => {
             alert(error)
           })
 
       },
-      getSelectValue(data) {
-
-        // alert( data.text)
+      getNoteTypeSelectValue(data) {
         this.nodeModel.noteType.text = data.text;
         this.nodeModel.noteType.id = data.id;
+        this.selectedNoteType = data.text;
+
       },
+      getProjectSelectValue(data) {
+        app.nodeModel.projectType.text = data.text;
+        app.nodeModel.projectType.id = data.id;
+        this.selectedProject= data.text;
+
+      },
+      getGeneralSubjectSelectValue(data) {
+        app.nodeModel.technologyType.text = data.text;
+        app.nodeModel.technologyType.id = data.id;
+        this.selectedGeneralSubject= data.text;
+
+      },      
+      getSpecificSubjectSelectValue(data) {
+        app.nodeModel.specificSubject.text = data.text;
+        app.nodeModel.specificSubject.id = data.id;
+        this.selectedSpecificSubject= data.text;
+
+      },
+      // -----------------------------------------------------------------
+
       updateType(variable) {
 
       },
@@ -105,24 +125,9 @@ window.EnableAddNode = function () {
       console.log('created ')
     },
     mounted() {
-      console.log("sssssssssssssssssssssssssssssssssss")
-      // dropdowns.enableNoteType(app);
-      dropdowns.enableProject(app);
-      dropdowns.enableGeneralSubject(app);
-      dropdowns.enableSpecificSubject(app);
     }
   });
 
 
-
-
-  $(document).ready(function () {
-    window.getProjectValue = function () {
-      debugger;
-      var s = $('#project').select2('data')
-      console.log(s);
-      var sss = s[0].text;
-      return sss;
-    }
-  })
+ 
 }
