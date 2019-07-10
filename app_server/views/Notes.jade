@@ -59,12 +59,40 @@ block content
     #banner.page-header
 
       .form-row   
-        .col-md-4.mb-3
+        .col-md-3.mb-3
           input#searchTxt.form-control(type='text',v-model="searchModel.searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
           .valid-feedback
+      
         .col-md-2.mb-3
-           select2.form-control(url="/GetNoteTypes",  @input-data="getNoteTypeSelectValue" , v-model="selected")
-          .valid-feedback          
+          select2.form-control( 
+                        placeHolder="Project",
+                         multi="true",
+                         url="/GetProjectTypes", 
+                         @input-data="getProjectSelectValue" ,
+                         v-model="selectedProject")
+        .col-md-2.mb-3
+          select2.form-control( 
+                        placeHolder="General Subject",
+                         multi="true",
+                         url="/GetTechnologies", 
+                         @input-data="getGeneralSubjectSelectValue" ,
+                         v-model="selectedGeneralSubject")
+        .col-md-2.mb-3
+           select2.form-control( 
+                        placeHolder="Specific Subject",
+                         multi="true",
+                         url="/GetSpecificSubject", 
+                         @input-data="getSpecificSubjectSelectValue" ,
+                         v-model="selectedSpecificSubject")
+        .col-md-1.mb-2
+           select2.form-control(
+             placeHolder="Note Type",
+             url="/GetNoteTypes", 
+              @input-data="getNoteTypeSelectValue" ,
+             v-model="selected")
+             .valid-feedback      
+
+          .valid-feedback       
         .col-md-0.5.mb-0.5  
          input#checkbox-3.checkbox-custom(name='checkbox-3', type='checkbox',v-model="searchModel.bookMark")
          label.checkbox-custom-label(for='checkbox-3')

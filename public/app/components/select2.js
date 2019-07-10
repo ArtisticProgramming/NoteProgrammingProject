@@ -12,6 +12,8 @@ export const select2 = Vue.component('select2', {
 
     var vm = this
     select2 = $(this.$el).select2({
+      placeholder: "Select a state",
+      allowClear: true,
        tags: vm.multi==="true" ? []:  undefined,
        maximumInputLength: 30,
        maximumSelectionSize: 1,
@@ -55,12 +57,16 @@ export const select2 = Vue.component('select2', {
       {
         data = $(this).select2('data')[0];
       }
-
-      if (data !== undefined) {
+      console.log("-----------------select 2 Data----------------------------")
+      console.log(data)
+      if (data !== undefined && data !== null) {
         vm.$emit("input-data", data);
         //   app.nodeModel.noteType.text = data.text;
         //   app.nodeModel.noteType.id = data.id;
+      }else {
+        vm.$emit("input-data", {text:"",id:""});
       }
+
     })
 
   

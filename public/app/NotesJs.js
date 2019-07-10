@@ -4,6 +4,7 @@ import { utility } from "./common/utilityJs"
 import { dropdowns } from "./common/dropdownsJs";
 import { select2 } from "./components/select2"
 
+
 window.EnableVusJs = function () {
   console.log(noteJsModel.test.name);
 
@@ -42,6 +43,15 @@ window.EnableVusJs = function () {
     methods: {
       getNoteTypeSelectValue(data) {
         this.searchModel.noteType = data.text;
+      },
+      getProjectSelectValue(data) {
+        this.searchModel.projectName = data.text;
+      },
+      getGeneralSubjectSelectValue(data) {
+        this.searchModel.technology = data.text;
+      },
+      getSpecificSubjectSelectValue(data) {
+        this.searchModel.specificSubject = data.text;
       },
       search: function () {
         page = 1;

@@ -2,7 +2,7 @@
 import { noteJsModel } from "./model/noteJsModel"
 import { codeMirrorComponent } from "./components/codeMirrorComponent"
 import { select2 } from "./components/select2"
-import { dropdowns } from "./common/dropdownsJs"
+
 
 window.EnableAddNode = function () {
   var app = new Vue({
@@ -125,6 +125,7 @@ window.EnableAddNode = function () {
       console.log('created ')
     },
     mounted() {
+     // $(".cardHeigth").blur();
     }
   });
 
