@@ -43,15 +43,19 @@ window.EnableVusJs = function () {
     methods: {
       getNoteTypeSelectValue(data) {
         this.searchModel.noteType = data.text;
+        this.search();
       },
       getProjectSelectValue(data) {
         this.searchModel.projectName = data.text;
+        this.search();
       },
       getGeneralSubjectSelectValue(data) {
         this.searchModel.technology = data.text;
+        this.search();
       },
       getSpecificSubjectSelectValue(data) {
         this.searchModel.specificSubject = data.text;
+        this.search();
       },
       search: function () {
         page = 1;
