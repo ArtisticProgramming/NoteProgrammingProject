@@ -23,25 +23,26 @@ block content
     ::-webkit-scrollbar-thumb:hover {
       background: #4e73dfba; 
     } 
+
     .OpenCloseNoteIcon:hover{
       color: green !important;
-
     }
+
     .deleteNoteIcon:hover{
       color: #9f0101 !important;
       cursor : pointer;
     }
+
     .card-footer span{
       margin-right:5px;
     }
 
     .noteMainTitle{
       color:#626262!important;
-
     }
+
     .noteMainTitle:hover{
       color:#4e73df!important
-      
     }
   //--------------------------------------------------------------------------
   div#app
@@ -62,7 +63,6 @@ block content
         .col-md-3.mb-3
           input#searchTxt.form-control(type='text',v-model="searchModel.searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
           .valid-feedback
-      
         .col-md-2.mb-3
           select2.form-control( 
                         placeHolder="Project",

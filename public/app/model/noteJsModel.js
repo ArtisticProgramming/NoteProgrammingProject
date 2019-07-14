@@ -15,7 +15,11 @@ var noteJsModel = {
     },
     deleteNote: function (id) {
         return axios.get('/DeleteNote?id=' + id)
-    }
+    },
+    getNoteTree:function(){
+        return axios.get('/GetNoteTree');
+    },
+  
 
 }
 

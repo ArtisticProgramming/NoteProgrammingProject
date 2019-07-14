@@ -12,7 +12,7 @@ export const select2 = Vue.component('select2', {
 
     var vm = this
     select2 = $(this.$el).select2({
-      placeholder: "Select a state",
+      // placeholder: "",
       allowClear: true,
        tags: vm.multi==="true" ? []:  undefined,
        maximumInputLength: 30,

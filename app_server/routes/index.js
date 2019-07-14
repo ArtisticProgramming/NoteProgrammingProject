@@ -50,6 +50,8 @@ router.get('/Note', IsAuthenticated, ctrlNote.Note);
 router.get('/GetNotes', IsAuthenticated, ctrlNote.GetNotes);
 router.get('/DeleteNote', IsAuthenticated, ctrlNote.DeleteNote);
 router.get('/NoteList', IsAuthenticated, ctrlNote.NoteList);
+router.get('/GetNoteTree', IsAuthenticated, ctrlNote.GetNoteTree);
+
 
 //Basic Data
 router.get('/GetProjectTypes', IsAuthenticated, ctrlBasicData.GetProjectTypes);

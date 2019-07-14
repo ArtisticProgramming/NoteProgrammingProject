@@ -11,6 +11,7 @@ module.exports = {
     main: [
       relativePath + '/app/AddNoteJs.js',
       relativePath + '/app/NotesJs.js',
+      relativePath + '/app/NoteListJs.js',
       relativePath + '/app/NoteUtilityJs.js',
       relativePath + '/app/sb-admin-2.js',
       relativePath + '/app/test.js',

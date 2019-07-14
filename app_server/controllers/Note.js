@@ -61,6 +61,7 @@ module.exports.Notes = async function (req, res) {
     res.render("Notes");
 };
 
+// ---------------------------------------------------GetNotes-------------------------------------------
 
 module.exports.GetNotes = async function (req, res) {
     let page = req.query.page //req.param('page');
@@ -125,6 +126,7 @@ module.exports.GetNotes = async function (req, res) {
             console.log(err);
         });
 };
+// ----------------------------------------------------------------------------------------------
 
 module.exports.DeleteNote = async function (req, res) {
     let id = req.query.id //req.param('page');
@@ -140,6 +142,8 @@ module.exports.DeleteNote = async function (req, res) {
             console.log(err);
         });
 }
+// ----------------------------------------------------------------------------------------------
+
 module.exports.Note = async function (req, res) {
     var id = req.query.id;
     // console.log(id)
@@ -155,49 +159,52 @@ module.exports.Note = async function (req, res) {
     // .catch((err) => {
     //     console.log(err);
     // });
+
     ////Seconde way with promiss and await
     var mainModel = await noteModel.findById({ _id: new ObjectId(id) })
 
     res.render("details", { title: "Note", model: mainModel });
 };
 
+// ----------------------------------------------------------------------------------------------
 
 module.exports.NoteList = function (req, res) {
-
-
-    var files = ['test.txt', 'choni.txt', 'legacy.zip', 'secrets.txt', 'etc.rar'];
-    var arr = new LINQ(files)
-        .Where(function (file) { return file === 'secrets.txt'; })
-        .OrderBy(function (file) { return file; })
-        .ToArray();
-    console.log("Aftre Filter")
-    console.log(arr)
-
-
-    let page = req.query.page //req.param('page');
-    let perPage = parseInt(req.query.perPage);
-
-    // var count = await noteModel.count()
-    // page = Math.max(0, page - 1)
-
-    // title = ""
-    // if (req.param('title') !== undefined) {
-    //     title = req.param('title');
-    // }
-    // // $options:'i' ==> it is for  Case-insensitive 
-    // noteModel.find({title: { $regex: '.*' + title + '.*' ,$options:'i'} })
-    //     .skip(perPage * page).limit(perPage)
-    //     .then((doc) => {
-    //         res.send({ model: doc, count: count, perPage: perPage, currentPage: page });
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-
-    res.render("noteList", { title: "Note", model: {} });
+    res.render("noteList", { title: "Note List", model: {} });
 }
 
+module.exports.GetNoteTree = async function (req, res) {
+    var notes = [];
+    notes = await noteModel.find().sort({ created: -1 }).select({_id:1, title: 1, Technology: 1 })
 
+    let modelDto = []
+    var parent = new LINQ(notes).OrderBy(function (note) { return note.Technology; }).Select(function (note) { return note.Technology; }).ToArray();
+    var parentUniq = parent.filter((v, i, a) => a.indexOf(v) === i);
+    parentUniq = parentUniq.filter(function (element) { return element !== undefined && element !== ''; });
+    console.log(parentUniq);
+
+    parentUniq.forEach(function (item, index) {
+        var model = {  state: { expanded: true }  ,data: { icon: 'parent' }, text: item, children: [] }
+
+        var chArray = new LINQ(notes)
+            .Where(function (note) { return note.Technology == item; })
+            .OrderBy(function (note) { return note.title; })
+            .ToArray();
+     
+        chArray.forEach(element => {
+            let chm={};
+            chm.text = element.title;
+            chm.id = element._id;
+            chm.data= { icon: 'children' }
+            model.children.push(chm);
+        });
+        console.log(model.children);
+
+        modelDto.push(model)
+    });
+    res.send(modelDto);
+}
+
+// ----------------------------------------------------------------------------------------------
 AddBasicData = function (text, type, profileId) {
     var basicData = new BasicDataModel({
         title: text,

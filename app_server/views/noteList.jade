@@ -1,48 +1,33 @@
+
 extends layoutAdmin
 
 block content
   style.
-  //--------------------------------------------------------------------------
-  div
-    #banner.page-header
-      .card.shadow.mb-4
-        .card-body
-          .table-responsive
-            table#example.table.table-bordered(width='100%', cellspacing='0')
-                thead
-                  tr
-                    th Name
-                    th Position
-                    th Office
-                    th Age
-                    th Start date
-                    th Salary
-                tbody
-                  tr
-                    td Tiger Nixon
-                    td System Architect
-                    td Edinburgh
-                    td 61
-                    td 2011/04/25
-                    td $320,800
-                  tr
-                    td Tiger Nixon11fdsfsdf
-                    td System Architectsdfsdf
-                    td Edinburgh2231sdfdsfsdfsd
-                    td 61sdfdsfds
-                    td 2011/04/25fdsf
-                    td $320,800sdfsdf
+    .parent:before {
+            font-family: "Font Awesome\ 5 Free";
+            content: "\f65e";
+            padding: 8px;
+            font-style: normal;
+     }
+     .children:before {
+              font-family: "Font Awesome\ 5 Free";
+              content: "\f1c9";
+              padding: 8px;
+              font-style: normal;
+     }
+    li.has-child > .tree-content {
+         background: #e2e2e2;
+         font-weight: bolder;
+         box-shadow: 0px 2px 4px 0px #9a9a9a;
+     }
+  div#appList
+    input#filter.form-control( type="text" placeholder="Type to filter..." v-model="treeFilter0" class="filter-field")
+    tree(:data="treeData",:options="treeOptions",  @node:selected="onNodeSelected", :filter="treeFilter0",style='width: 500px;background: rgb(243, 243, 243);margin: 10px;')
+       span.tree-text(slot-scope='{ node }')
+          template(v-if='!node.data.icon')
+            | {{ node.text }}
+          template(v-else='')
+             i(:class='node.data.icon')
+             | {{ node.text }}
 
-            //- .row
-            //-     .col-lg-12
-            //-       // Dropdown Card Example
-            //-       ul.list-group
-            //-         li.list-group-item(v-for="(item, index) in boxmodel",v-bind:note-id="item._id", :key="item._id")
-            //-           a(v-bind:href="'/Note?id='+item._id", style="text-decoration: none;")   {{item.title}}
-            //- .card.shadow.mb-4
-            //-   // Card Header - Dropdown
-            //-   .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-            //-    
-            //-       h6.m-0.font-weight-bold.text-primary {{item.title}}
-            //-     a.OpenCloseNote(href="#")
-            //-       i.OpenCloseNoteIcon.fa.fa-arrows-alt.text-gray-400
+
