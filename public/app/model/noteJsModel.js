@@ -19,7 +19,9 @@ var noteJsModel = {
     getNoteTree:function(){
         return axios.get('/GetNoteTree');
     },
-  
+    getNote:function(model){
+        return axios.get('/GetNote?id='+model.id);
+    }
 
 }
 

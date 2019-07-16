@@ -126,7 +126,7 @@ module.exports.GetNotes = async function (req, res) {
             console.log(err);
         });
 };
-// ----------------------------------------------------------------------------------------------
+// -----------------------------------------------DeleteNote-----------------------------------------------
 
 module.exports.DeleteNote = async function (req, res) {
     let id = req.query.id //req.param('page');
@@ -142,35 +142,22 @@ module.exports.DeleteNote = async function (req, res) {
             console.log(err);
         });
 }
-// ----------------------------------------------------------------------------------------------
+// ---------------------------------------------Note-------------------------------------------------
 
 module.exports.Note = async function (req, res) {
     var id = req.query.id;
-    // console.log(id)
-
     var ObjectId = require('mongoose').Types.ObjectId;
-    ////First way with promiss and then
-    // var mo = noteModel.findById({ _id: new ObjectId(id) })
-    // mo.then((doc) => {
-    //     //mainModel = doc;
-    //     //res.render("Note", { title: "Note", model: mainModel });
-    //     console.log("inside Promis 1")
-    // })
-    // .catch((err) => {
-    //     console.log(err);
-    // });
-
-    ////Seconde way with promiss and await
     var mainModel = await noteModel.findById({ _id: new ObjectId(id) })
-
     res.render("details", { title: "Note", model: mainModel });
 };
 
-// ----------------------------------------------------------------------------------------------
+
+// ---------------------------------------------NoteList-------------------------------------------------
 
 module.exports.NoteList = function (req, res) {
     res.render("noteList", { title: "Note List", model: {} });
 }
+// ---------------------------------------------GetNoteTree-------------------------------------------------
 
 module.exports.GetNoteTree = async function (req, res) {
     var notes = [];
@@ -217,3 +204,15 @@ AddBasicData = function (text, type, profileId) {
         console.log("BasicData saved to note collection.");
     });
 }
+// -------------------------------------------GetNote---------------------------------------------------
+module.exports.GetNote = async function (req, res) {
+    var id = req.query.id;
+    var ObjectId = require('mongoose').Types.ObjectId;
+    var mainModel =  noteModel.findById({ _id: new ObjectId(id) })
+    .then((model) => {
+        res.send({  model });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+};

@@ -20,14 +20,51 @@ block content
          font-weight: bolder;
          box-shadow: 0px 2px 4px 0px #9a9a9a;
      }
+     .tree-content {
+        height: 26px;
+        font-size: 15px;
+     }
+    .tree-anchor {
+        padding: 3px 0px;
+    }
   div#appList
-    input#filter.form-control( type="text" placeholder="Type to filter..." v-model="treeFilter0" class="filter-field")
-    tree(:data="treeData",:options="treeOptions",  @node:selected="onNodeSelected", :filter="treeFilter0",style='width: 500px;background: rgb(243, 243, 243);margin: 10px;')
-       span.tree-text(slot-scope='{ node }')
-          template(v-if='!node.data.icon')
-            | {{ node.text }}
-          template(v-else='')
-             i(:class='node.data.icon')
-             | {{ node.text }}
+    input#filter.form-control( type="text" 
+     placeholder="Type to filter..."
+     v-model="treeFilter0"
+     class="filter-field")
+    .row
+        .col-md-3(style="padding-right:0px")
+            tree(:data="treeData",:options="treeOptions",  
+            @node:selected="onNodeSelected", :filter="treeFilter0",
+            style='background: rgb(243, 243, 243);margin: 10px;')
+              span.tree-text(slot-scope='{ node }')
+                  template(v-if='!node.data.icon')
+                    | {{ node.text }}
+                  template(v-else='')
+                    i(:class='node.data.icon')
+                    | {{ node.text }}
 
+          .col-lg-9(style="margin-top:8px;padding-left:0px" v-for="(item, index) in boxmodel",v-bind:note-id="item._id", :key="item._id")
+            //- // Dropdown Card Example
+            .card.shadow.mb-4
+              //- // Card Header - Dropdown
+              .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(v-on:click.self="OpenCloseNote(item._id)")
+                a(v-bind:href="'/Note?id='+item._id+'&title='+item.title.replace(/ /g,'_')", style="text-decoration: none;")
+                  h5.m-0.font-weight-bold.text-primary.noteMainTitle {{item.title}}
 
+              //- // Card Body
+              .card-body.cardHeigth(v-bind:id="'oc-'+item._id", style="")
+                  div(v-for="code in item.code")
+                      h6 {{code.description}}
+                      code-mirror.form-control(v-bind:body="code.mainbody",rows='8' ,v-bind:lang="code.porgrammingStylelanguge", :key="componentKey" , v-bind:id="code._id") 
+                      br
+                .card-footer.text-muted
+                  //a.deleteNote(style=("float: right;"), v-on:click="deleteNote(item._id,index)")
+                    i.deleteNoteIcon.fa.fa-trash.text-gray-400
+                  a.deleteNote( v-on:click="openDeleteModal(item._id,index)" , style=("float: right;"))
+                    i.deleteNoteIcon.fa.fa-trash.text-gray-400                   
+                  
+                  span.badge.badge-primary(v-if="item.projectName"){{item.projectName}}
+                  span.badge.badge-success(v-if="item.Technology"){{item.Technology}}
+                  span.badge.badge-info(v-if="item.Technology"){{item.SpecificSubject}}
+                  //- span.badge.badge-dark(v-if="item.Type"){{item.Type}}

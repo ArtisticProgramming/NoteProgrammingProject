@@ -51,6 +51,7 @@ router.get('/GetNotes', IsAuthenticated, ctrlNote.GetNotes);
 router.get('/DeleteNote', IsAuthenticated, ctrlNote.DeleteNote);
 router.get('/NoteList', IsAuthenticated, ctrlNote.NoteList);
 router.get('/GetNoteTree', IsAuthenticated, ctrlNote.GetNoteTree);
+router.get('/GetNote', IsAuthenticated, ctrlNote.GetNote);
 
 
 //Basic Data
@@ -58,6 +59,8 @@ router.get('/GetProjectTypes', IsAuthenticated, ctrlBasicData.GetProjectTypes);
 router.get('/GetTechnologies', IsAuthenticated, ctrlBasicData.GetTechnologies);
 router.get('/GetSpecificSubject', IsAuthenticated, ctrlBasicData.GetSpecificSubject);
 router.get('/GetNoteTypes', IsAuthenticated, ctrlBasicData.GetNoteTypes);
+
+
 
 // router.post('/AddProjectType', IsAuthenticated, ctrlBasicData.AddProjectType);
 // router.post('/AddTechnology', IsAuthenticated, ctrlBasicData.AddTechnology);
