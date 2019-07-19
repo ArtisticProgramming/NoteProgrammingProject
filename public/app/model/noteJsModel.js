@@ -21,6 +21,9 @@ var noteJsModel = {
     },
     getNote:function(model){
         return axios.get('/GetNote?id='+model.id);
+    },
+    updateNote:function(model){
+        return axios.post('/UpdateNote', { model: model })
     }
 
 }

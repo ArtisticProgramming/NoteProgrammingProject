@@ -27,6 +27,16 @@ block content
     .tree-anchor {
         padding: 3px 0px;
     }
+    .rightBtn{
+         margin: 0px 5px;
+        font-size: 17px;
+        color: #b6b6b6 !important;
+        cursor:pointer;
+
+    }
+    .rightBtn:hover{
+      color: #2bc82b !important;
+    }
   div#appList
     input#filter.form-control( type="text" 
      placeholder="Type to filter..."
@@ -49,21 +59,29 @@ block content
             .card.shadow.mb-4
               //- // Card Header - Dropdown
               .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between(v-on:click.self="OpenCloseNote(item._id)")
-                a(v-bind:href="'/Note?id='+item._id+'&title='+item.title.replace(/ /g,'_')", style="text-decoration: none;")
-                  h5.m-0.font-weight-bold.text-primary.noteMainTitle {{item.title}}
-
+               a(v-if="!editMode", v-bind:href="'/Note?id='+item._id+'&title='+item.title.replace(/ /g,'_')", style="text-decoration: none;")
+                   h5.m-0.font-weight-bold.text-primary.noteMainTitle {{item.title}}
+               input.form-control(v-if="editMode" type='text', v-model="item.title")
               //- // Card Body
               .card-body.cardHeigth(v-bind:id="'oc-'+item._id", style="")
-                  div(v-for="code in item.code")
-                      h6 {{code.description}}
-                      code-mirror.form-control(v-bind:body="code.mainbody",rows='8' ,v-bind:lang="code.porgrammingStylelanguge", :key="componentKey" , v-bind:id="code._id") 
+                  div(v-for="code, index2) in item.code")
+                      h6(v-if="!editMode") {{code.description}}
+                      input.form-control(v-if="editMode" , type='text', v-model="code.description")
+                      br(v-if="editMode") 
+                      code-mirror.form-control(@input-text-area="updateCodeMirrorText" , 
+                          v-bind:index="index2", v-bind:body="code.mainbody",rows='8' ,
+                          v-bind:lang="code.porgrammingStylelanguge", :key="componentKey" , 
+                          v-bind:id="code._id") 
                       br
                 .card-footer.text-muted
                   //a.deleteNote(style=("float: right;"), v-on:click="deleteNote(item._id,index)")
                     i.deleteNoteIcon.fa.fa-trash.text-gray-400
-                  a.deleteNote( v-on:click="openDeleteModal(item._id,index)" , style=("float: right;"))
+                  a.rightBtn.deleteNote( v-on:click="openDeleteModal(item._id,index)" , style=("float: right;"))
                     i.deleteNoteIcon.fa.fa-trash.text-gray-400                   
-                  
+                  a.rightBtn( v-on:click="editMode=!editMode" , style=("float: right;"))
+                    i.fa.fa-edit.text-gree-400    
+                  a.rightBtn.saveNote( v-on:click="updateNote()" , style=("float: right;"))
+                    i.saveNoteIcon.fa.fa-save.text-gree-400    
                   span.badge.badge-primary(v-if="item.projectName"){{item.projectName}}
                   span.badge.badge-success(v-if="item.Technology"){{item.Technology}}
                   span.badge.badge-info(v-if="item.Technology"){{item.SpecificSubject}}

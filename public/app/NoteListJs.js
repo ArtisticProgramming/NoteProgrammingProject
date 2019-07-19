@@ -10,6 +10,7 @@ var app = new Vue({
   data: function () {
     
     return {
+      editMode:false,
       componentKey:1,
       boxmodel:[],
       // treeData0: f0,
@@ -29,6 +30,7 @@ var app = new Vue({
 
   },
   methods: {
+   
     filter() {
 
     },
@@ -54,9 +56,32 @@ var app = new Vue({
         })
       })
     },
+    updateCodeMirrorText(item) {
+      console.log(item)
+      this.boxmodel[0].code[item.index].mainbody = item.value
+    },    
     search: function () {
       // alert("s")
       console.log(this.$refs)
+    },
+    updateNote(){
+      var model=this.boxmodel[0];
+      noteJsModel.updateNote(model)
+      .then(response => {
+        debugger;
+        this.editMode=false
+        alert("The recorde was updated successfully.")
+        this.$nextTick(function () {
+          this.componentKey += 1;
+        })
+      })
+    },
+    editMode(){
+      alert("editMode")
+      if(this.editMode)
+        this.editMode = false;
+      else
+        this.editMode = true;
     },
     onNodeSelected(item) {
       if (item.children.length == 0) {

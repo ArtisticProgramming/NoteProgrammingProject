@@ -52,6 +52,7 @@ router.get('/DeleteNote', IsAuthenticated, ctrlNote.DeleteNote);
 router.get('/NoteList', IsAuthenticated, ctrlNote.NoteList);
 router.get('/GetNoteTree', IsAuthenticated, ctrlNote.GetNoteTree);
 router.get('/GetNote', IsAuthenticated, ctrlNote.GetNote);
+router.post('/UpdateNote', IsAuthenticated, ctrlNote.UpdateNote);
 
 
 //Basic Data

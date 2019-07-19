@@ -161,7 +161,7 @@ module.exports.NoteList = function (req, res) {
 
 module.exports.GetNoteTree = async function (req, res) {
     var notes = [];
-    notes = await noteModel.find().sort({ created: -1 }).select({_id:1, title: 1, Technology: 1 })
+    notes = await noteModel.find().sort({ created: -1 }).select({ _id: 1, title: 1, Technology: 1 })
 
     let modelDto = []
     var parent = new LINQ(notes).OrderBy(function (note) { return note.Technology; }).Select(function (note) { return note.Technology; }).ToArray();
@@ -170,18 +170,18 @@ module.exports.GetNoteTree = async function (req, res) {
     console.log(parentUniq);
 
     parentUniq.forEach(function (item, index) {
-        var model = {  state: { expanded: true }  ,data: { icon: 'parent' }, text: item, children: [] }
+        var model = { state: { expanded: true }, data: { icon: 'parent' }, text: item, children: [] }
 
         var chArray = new LINQ(notes)
             .Where(function (note) { return note.Technology == item; })
             .OrderBy(function (note) { return note.title; })
             .ToArray();
-     
+
         chArray.forEach(element => {
-            let chm={};
+            let chm = {};
             chm.text = element.title;
             chm.id = element._id;
-            chm.data= { icon: 'children' }
+            chm.data = { icon: 'children' }
             model.children.push(chm);
         });
         console.log(model.children);
@@ -208,11 +208,33 @@ AddBasicData = function (text, type, profileId) {
 module.exports.GetNote = async function (req, res) {
     var id = req.query.id;
     var ObjectId = require('mongoose').Types.ObjectId;
-    var mainModel =  noteModel.findById({ _id: new ObjectId(id) })
-    .then((model) => {
-        res.send({  model });
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+    var mainModel = noteModel.findById({ _id: new ObjectId(id) })
+        .then((model) => {
+            res.send({ model });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
+module.exports.UpdateNote = function (req, res) {
+    console.log("===================")
+    var id = req.body.model._id;
+    var ObjectId = require('mongoose').Types.ObjectId;
+
+    console.log(req.body)
+    console.log(id)
+
+    // noteModel.findById({ _id: new ObjectId(id) }, function (err, doc) {
+    //     doc.title = 'sssssssssssssssssssssssssssssssss bourne';
+    //     doc.save(o);
+    // });
+    var query = { _id: new ObjectId(id) };
+    noteModel.findOneAndUpdate(query, req.body.model, {upsert:true}, function(err, doc){
+        if (err) return res.send(500, { error: err });
+        return res.send("succesfully saved");
+    });
+
+   
+
+};
+
