@@ -38,6 +38,17 @@ block content
       color: #2bc82b !important;
     }
   div#appList
+    #deleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+              .modal-dialog(role='document')
+                          .modal-content
+                            .modal-header
+                              h5#exampleModalLabel.modal-title Delete Note
+                              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                            .modal-body Do you want to delete this Note?
+                            .modal-footer
+                              button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+                              a.btn.btn-primary(href='#'  ,v-on:click="deleteNote(deleteModalNote.id,deleteModalNote.index)"  ) Ok  
     input#filter.form-control( type="text" 
      placeholder="Type to filter..."
      v-model="treeFilter0"

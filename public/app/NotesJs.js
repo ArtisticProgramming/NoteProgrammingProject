@@ -144,7 +144,7 @@ window.EnableVusJs = function () {
         console.log(id)
         this.deleteModalNote.id = id;
         this.deleteModalNote.index = index;
-        index
+        // index
         this.$nextTick(function () {
           $('#deleteModal').modal('toggle');
         })

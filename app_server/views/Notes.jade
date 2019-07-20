@@ -58,7 +58,6 @@ block content
                             button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
                             a.btn.btn-primary(href='#'  ,v-on:click="deleteNote(deleteModalNote.id,deleteModalNote.index)"  ) Ok
     #banner.page-header
-
       .form-row   
         .col-md-3.mb-3
           input#searchTxt.form-control(type='text',v-model="searchModel.searchTextBox", v-on:keyup.enter="search()", placeholder='Search for...', aria-label='Search', aria-describedby='basic-addon2')
