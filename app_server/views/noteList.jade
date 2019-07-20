@@ -46,7 +46,7 @@ block content
         .col-md-3(style="padding-right:0px")
             tree(:data="treeData",:options="treeOptions",  
             @node:selected="onNodeSelected", :filter="treeFilter0",
-            style='background: rgb(243, 243, 243);margin: 10px;')
+            style='background: rgb(248, 249, 252);margin: 10px;')
               span.tree-text(slot-scope='{ node }')
                   template(v-if='!node.data.icon')
                     | {{ node.text }}
@@ -66,13 +66,34 @@ block content
               .card-body.cardHeigth(v-bind:id="'oc-'+item._id", style="")
                   div(v-for="code, index2) in item.code")
                       h6(v-if="!editMode") {{code.description}}
-                      input.form-control(v-if="editMode" , type='text', v-model="code.description")
-                      br(v-if="editMode") 
+                      .form-row(v-if="editMode" )
+                        .col-md-8.mb-2
+                          input.form-control( type='text', v-model="code.description")
+                        .col-md-3.mb-2.form-group.selectlang
+                          select.form-control.form-control(name="code[0][codelang]",v-model="code.porgrammingStylelanguge")
+                            option(value="htmlmixed") Html
+                            option(value="text/css")  CSS
+                            option(value="text/javascript")  JavaScript
+                            option(value="text/x-sql")  SQl
+                            option(value="text/x-csharp")  C#
+                            option(value="text/x-python")  Python
+                            option(value="text/x-java")  Java
+                            option(value="text/x-php")  PHP
+                            option(value="text/x-c++src")  C++
+                            option(value="text/x-csrc")  C
+                            option(value="text/x-go")  Go
+                            option(value="text/x-rsrc")  R
+                            option(value="application/x-powershell")  PowerShell
+                            option(value="")  Others...
+                        button.col-md-1.btn.btn-danger.mb-2.btn.btn-danger( v-on:click="deleteNodeCode(index2)" ,v-if="editMode") 
+                            i.fa.fa-trash.text-gree-400  
                       code-mirror.form-control(@input-text-area="updateCodeMirrorText" , 
                           v-bind:index="index2", v-bind:body="code.mainbody",rows='8' ,
                           v-bind:lang="code.porgrammingStylelanguge", :key="componentKey" , 
                           v-bind:id="code._id") 
                       br
+                  button.btn.btn-secondary.btn-block( v-on:click="addNoteCode()" ,v-if="editMode") 
+                    i.fa.fa-plus.text-gree-400    
                 .card-footer.text-muted
                   //a.deleteNote(style=("float: right;"), v-on:click="deleteNote(item._id,index)")
                     i.deleteNoteIcon.fa.fa-trash.text-gray-400
@@ -80,7 +101,7 @@ block content
                     i.deleteNoteIcon.fa.fa-trash.text-gray-400                   
                   a.rightBtn( v-on:click="editMode=!editMode" , style=("float: right;"))
                     i.fa.fa-edit.text-gree-400    
-                  a.rightBtn.saveNote( v-on:click="updateNote()" , style=("float: right;"))
+                  a.rightBtn.saveNote(v-if="editMode", v-on:click="updateNote()" , style=("float: right;"))
                     i.saveNoteIcon.fa.fa-save.text-gree-400    
                   span.badge.badge-primary(v-if="item.projectName"){{item.projectName}}
                   span.badge.badge-success(v-if="item.Technology"){{item.Technology}}

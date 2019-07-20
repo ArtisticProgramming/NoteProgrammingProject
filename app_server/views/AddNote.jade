@@ -50,7 +50,7 @@ block content
                     input#exampleInputEmail1.form-control(type='text', v-model="item.desc"
                     name="code[0][desc]", aria-describedby='emailHelp', placeholder='Title')
                    
-                  .form-group.col-md-2.selectlang
+                 .form-group.col-md-2.selectlang
                     select.form-control.form-control(name="code[0][codelang]",v-model="item.lang")
                       option(value="htmlmixed") Html
                       option(value="text/css")  CSS
@@ -65,7 +65,7 @@ block content
                       option(value="text/x-go")  Go
                       option(value="text/x-rsrc")  R
                       option(value="application/x-powershell")  PowerShell
-                      option(value="")  Others...
+                      option(value="")  Others... 
                   .form-group.col-md-12.note-body
                     code-mirror.form-control(v-bind:body="item.mainbody",rows='8' ,style="margin: 10px;"
                      v-bind:lang="item.lang",v-bind:index="index", :key="componentKey" ,@input-text-area="updateCodeMirrorText" 
