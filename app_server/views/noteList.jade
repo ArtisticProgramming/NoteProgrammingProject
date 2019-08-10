@@ -15,10 +15,11 @@ block content
               padding: 8px;
               font-style: normal;
      }
-    li.has-child > .tree-content {
-         background: #e2e2e2;
+    li.has-child > .tree-content span {
+        //-  background: #e2e2e2;
          font-weight: bolder;
-         box-shadow: 0px 2px 4px 0px #9a9a9a;
+        //-  box-shadow: 0px 2px 4px 0px #9a9a9a;
+        color:#4e73df;
      }
      .tree-content {
         height: 26px;
@@ -36,6 +37,13 @@ block content
     }
     .rightBtn:hover{
       color: #2bc82b !important;
+    }
+
+    .tree{
+      background: white;
+      margin: 10px;
+              border-radius: 4px;
+    border: 1px solid #d1d1d1;
     }
   div#appList
     #deleteModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
@@ -55,9 +63,9 @@ block content
      class="filter-field")
     .row
         .col-md-3(style="padding-right:0px")
-            tree(:data="treeData",:options="treeOptions",  
+            tree.shadow(:data="treeData",:options="treeOptions",  
             @node:selected="onNodeSelected", :filter="treeFilter0",
-            style='background: rgb(248, 249, 252);margin: 10px;')
+            style='')
               span.tree-text(slot-scope='{ node }')
                   template(v-if='!node.data.icon')
                     | {{ node.text }}
