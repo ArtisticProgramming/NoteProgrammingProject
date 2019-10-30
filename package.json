@@ -26,7 +26,7 @@
     "jade": "~1.11.0",
     "jquery": "^3.4.1",
     "liquor-tree": "^0.2.59",
-    "mongoose": "^5.5.9",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "node-linq": "0.0.5",
     "nodemon": "^1.19.1",
