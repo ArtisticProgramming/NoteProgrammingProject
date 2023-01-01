@@ -51,7 +51,7 @@
     "merge-stream": "^1.0.1",
     "nodemon-webpack-plugin": "^4.0.8",
     "uglifyjs-webpack-plugin": "^2.1.3",
-    "webpack": "^4.33.0"
+    "webpack": "^5.75.0"
   },
   "description": "This is the code for the sample 'Loc8r' application that is built through the course of my book [Getting MEAN](https://www.manning.com/books/getting-mean-with-mongo-express-angular-and-node).",
   "main": "app.js",
